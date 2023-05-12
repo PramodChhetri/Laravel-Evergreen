@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\Role;
+use App\Models\User;
 
 class AdminSeeder extends Seeder
 {
@@ -14,16 +14,18 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Admin3',
-            'email' => 'admin3@admin.com',
+        // Role is unique so it can created for one time only
+        $adminRole = Role::create(['name' => 'admin']);
+        $sellerRole = Role::create(['name' => 'seller']);
+        $buyerRole = Role::create(['name' => 'buyer']);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password'),
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'is_admin' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
+            'role_id' =>$adminRole->id  
         ]);
+        
+
     }
 }
-
-

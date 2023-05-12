@@ -14,13 +14,27 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // Seller
         DB::table('users')->insert([
             'name' => Str::random(5),
             'email' => Str::random(5).'@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'role_id' => 2,
+        ]);
+        
+        // Buyer
+        DB::table('users')->insert([
+            'name' => Str::random(5),
+            'email' => Str::random(5).'@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
         ]);
     }
 }

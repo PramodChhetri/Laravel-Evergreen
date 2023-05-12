@@ -13,24 +13,37 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- JQuery Table Script -->
+        <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
+        <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
+        <script src="{{asset('datatable/datatables.js')}}"></script>
+
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+        <div class="flex">
+            <div class="w-48 h-screen bg-green-500 shadow-lg flex justify-center ">
+                <div class="menu flex items-center justify-center">
+                    <div class="flex flex-col">
+                    <a href="/dashboard" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white ">Dashboard</a>
+                    <a href="{{route('allusers.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Users</a>
+                    <a href="{{route('categories.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Categories</a>
+                    <a href="{{route('products.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Products</a>
+                    <a href="{{route('roles.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Roles</a>
+                    <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Permissions</a>
+                    <a href="/profile" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Profile</a>
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                </div>
+            </div>
+            <div class="flex-1 bg-gray-200">
+                <div>
+                    @include('layouts.navigation')
+                </div>
+                <div class="p-5">
+                    @yield('content')
+                </div>
+            </div>            
+           </div>
         </div>
     </body>
 </html>

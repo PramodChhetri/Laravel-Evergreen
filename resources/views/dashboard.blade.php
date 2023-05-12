@@ -1,17 +1,33 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+@section('content')
+    <h2 class="font-bold text-4xl text-black-700">Dashboard</h2> 
+    <hr class="h-1 bg-red-500">
+
+    <div class="py-2">
+        <h2 class="font-bold text-2xl text-green-700">Hello, {{Auth::user()->name }}. Welcome to Admin Dashboard.</h2> 
     </div>
-</x-app-layout>
+    
+    <div class="mt-4 grid grid-cols-3 gap-10">
+
+        <div class="px-4 py-8 rounded-lg bg-blue-600 text-white flex justify-between">
+            <p class="font-bold text-lg">Evergreen Community</p>
+            <p class="font-bold text-5xl">{{count($users)}}</p>
+        </div>
+
+
+        <div class="px-4 py-8 rounded-lg bg-red-600 text-white flex justify-between">
+            <p class="font-bold text-lg">Total Categories</p>
+            <p class="font-bold text-5xl">8</p>
+        </div>
+
+
+        <div class="px-4 py-8 rounded-lg bg-green-600 text-white flex justify-between">
+            <p class="font-bold text-lg">Pending Orders</p>
+            <p class="font-bold text-5xl">19</p>
+        </div>
+
+    </div>
+
+@endsection
+

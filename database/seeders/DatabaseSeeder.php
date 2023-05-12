@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(
             AdminSeeder::class,
+            UserFaker::class,
             UserSeeder::class,
-            UserFake::class
         );
 
     }
