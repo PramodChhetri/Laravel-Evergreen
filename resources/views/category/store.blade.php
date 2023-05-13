@@ -1,0 +1,1 @@
+{{-- After validation redirected to another page either index or create--}}

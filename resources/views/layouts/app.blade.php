@@ -25,13 +25,13 @@
             <div class="w-48 h-screen bg-green-500 shadow-lg flex justify-center ">
                 <div class="menu flex items-center justify-center">
                     <div class="flex flex-col">
-                    <a href="/dashboard" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white ">Dashboard</a>
-                    <a href="{{route('allusers.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Users</a>
-                    <a href="{{route('categories.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Categories</a>
-                    <a href="{{route('products.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Products</a>
-                    <a href="{{route('roles.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Roles</a>
-                    <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Permissions</a>
-                    <a href="/profile" class="text-xl text-white m-3 border-b-2 hover:bg-blue-500 hover:text-white">Profile</a>
+                    <a href="/dashboard" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white ">Dashboard</a>
+                    <a href="{{route('allusers.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Users</a>
+                    <a href="{{route('category.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Categories</a>
+                    <a href="{{route('products.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Products</a>
+                    <a href="{{route('roles.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Roles</a>
+                    <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Permissions</a>
+                    <a href="/profile" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Profile</a>
                     </div>
                 </div>
             </div>
