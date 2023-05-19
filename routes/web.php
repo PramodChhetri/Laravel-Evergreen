@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AllUserController;
+use App\Http\Controllers\ProductController;
 use App\Models\User;
 use App\Models\Role;
 
@@ -30,14 +32,6 @@ Route::get('/dashboard', function () {
     return view('dashboard',compact('users'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/allusers', function () {
-    $users = User::all();
-    return view('allusers/index',compact('users'));
-})->middleware(['auth', 'verified'])->name('allusers.index');
-
-Route::get('/products', function () {
-    return view('products/index');
-})->middleware(['auth', 'verified'])->name('products.index');
 
 // Role and Permission
 Route::middleware(['auth','role:admin'])->group(function(){
@@ -59,6 +53,11 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
 
 Route::middleware('auth')->group(function () {
+
+    // All Users
+    Route::get('/allusers', [AllUserController::class, 'index'])->name('allusers.index');
+    Route::get('/allusers/create', [AllUserController::class, 'create'])->name('allusers.create');
+
     // Category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -67,6 +66,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/category/{id}/update',[CategoryController::class,'update'])->name('category.update');
      // Route::get('/category/{id}/destroy',[CategoryController::class,'destroy'])->name('category.destroy');
      Route::post('/category/destroy',[CategoryController::class,'destroy'])->name('category.destroy');
+
+     // Product
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products/store',[ProductController::class,'store'])->name('products.store');
+    Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('products.edit');
+    Route::post('/products/{id}/update',[ProductController::class,'update'])->name('products.update');
+    Route::post('/products/destroy',[ProductController::class,'destroy'])->name('products.destroy');
+
+
 });                                                 
 
 

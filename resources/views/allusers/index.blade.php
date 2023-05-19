@@ -6,7 +6,7 @@
 <hr class="h-1 bg-red-500">
 
 <div class="my-4 text-right px-10">
-    <a href="" class="bg-amber-400 text-black px-4 py-2 rounded-lg shadow-md hover:shadow-amber-300">Add New User</a>
+    <a href="{{route('allusers.create')}}" class="bg-amber-400 text-black px-4 py-2 rounded-lg shadow-md hover:shadow-amber-300">Add New User</a>
 </div>
 
 <div class="py-2">
@@ -21,7 +21,7 @@
             <th>Action</th>
         </thead>
         <tbody>
-            @foreach($users as $usr)
+            @foreach($allusers as $usr)
             <tr>
                 <td>{{$usr->id}}</td>
                 <td>{{$usr->name}}</td>

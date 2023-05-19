@@ -22,8 +22,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="flex">
-            <div class="w-48 h-screen bg-green-500 shadow-lg flex justify-center ">
-                <div class="menu flex items-center justify-center">
+            <div class="w-52 min-h-screen bg-green-500 shadow-lg flex flex-row justify-center py-24 ">
                     <div class="flex flex-col">
                     <a href="/dashboard" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white ">Dashboard</a>
                     <a href="{{route('allusers.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Users</a>
@@ -33,7 +32,6 @@
                     <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Permissions</a>
                     <a href="/profile" class="text-xl text-white m-3 border-b-2 hover:bg-red-700 hover:text-white">Profile</a>
                     </div>
-                </div>
             </div>
             <div class="flex-1 bg-gray-200">
                 <div>
