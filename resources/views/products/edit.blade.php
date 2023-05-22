@@ -36,7 +36,7 @@
 
         <select name="condition" id="" class="w-full rounded-lg border-2 border-red-300 my-2">
             <option value="" disabled selected hidden  >Select Condition</option>
-            <option value="new" @if ($product->condition == "New")
+            <option value="New" @if ($product->condition == "New")
                 {{"selected"}}
             @endif>New</option>
             <option value="Farily New" @if ($product->condition == "Fairly New")
@@ -60,6 +60,7 @@
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
+        <img class="w-44 border-2 border-red-300 my-1 p-1" src="{{ asset('images/products/'.$product->photopath) }}" alt="">
 
         <input type="file" name="photopath" class="w-full rounded-lg border-2 border-red-300 my-2">
         @error('photopath')
@@ -67,7 +68,7 @@
         @enderror
 
         <div class="flex">
-            <input type="submit" class="bg-blue-600 text-white px-4 py-2 mx-2 rounded-lg" value="Add Product">
+            <input type="submit" class="bg-blue-600 text-white px-4 py-2 mx-2 rounded-lg" value="Update Product">
 
             <a href="{{route('products.index')}}" class="bg-red-600 text-white px-10 py-2 mx-2 rounded-lg">Exit</a>
         </div>

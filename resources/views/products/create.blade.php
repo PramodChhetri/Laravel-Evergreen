@@ -7,7 +7,11 @@
         <select name="category_id" id="" class="w-full rounded-lg border-2 border-red-300 my-2">
             <option value="" disabled selected hidden >Select Category</option>
             @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+            <option 
+            @if (old('category_id') == $category->id)
+                {{"selected"}}
+            @endif
+            value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
         </select>
         @error('category_id')
@@ -32,9 +36,21 @@
 
         <select name="condition" id="" class="w-full rounded-lg border-2 border-red-300 my-2">
             <option value="" disabled selected hidden  >Select Condition</option>
-            <option value="New">New</option>
-            <option value="Fairly New">Fairly New</option>
-            <option value="Old">Old</option>
+            <option 
+            @if (old('condition') == "New")
+                {{"selected"}}
+            @endif
+            value="New">New</option>
+            <option
+            @if (old('condition') == "Fairly New")
+                {{"selected"}}
+            @endif
+            value="Fairly New">Fairly New</option>
+            <option
+            @if (old('condition') == "Old")
+                {{"selected"}}
+            @endif
+            value="Old">Old</option>
         </select>
         @error('condition')
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
