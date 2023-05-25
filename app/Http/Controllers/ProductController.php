@@ -59,7 +59,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $data = $request->validate([
             'category_id' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:products,name,'.$product->id,
             'price' => 'numeric|required',
             'stock' => 'numeric|required',
             'description' => 'required',

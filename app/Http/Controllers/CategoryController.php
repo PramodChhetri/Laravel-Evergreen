@@ -42,8 +42,9 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        $category = Category::find($id);
         $data = $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:categories,name,'.$category->id,
             'priority' => 'required|numeric'
         ]);
 

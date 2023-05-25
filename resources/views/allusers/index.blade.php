@@ -25,7 +25,7 @@
             <tr>
                 <td>{{$usr->id}}</td>
                 <td>{{$usr->name}}</td>
-                <td>{{$usr->role_id}}</td>
+                <td>{{$usr->role->name}}</td>
                 <td>{{$usr->email}}</td>
                 <td>{{$usr->created_at->diffForHumans()}}</td>
                 <td>{{$usr->updated_at->diffForHumans()}}</td>
