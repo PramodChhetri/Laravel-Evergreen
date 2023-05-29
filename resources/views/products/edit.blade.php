@@ -39,9 +39,9 @@
             <option value="New" @if ($product->condition == "New")
                 {{"selected"}}
             @endif>New</option>
-            <option value="Farily New" @if ($product->condition == "Fairly New")
+            <option value="FairlyNew" @if ($product->condition == "FairlyNew")
                 {{"selected"}}
-            @endif >Fairly New</option>
+            @endif >FairlyNew</option>
             <option value="Old" @if ($product->condition == "Old")
                 {{"selected"}}
             @endif >Old</option>
@@ -59,7 +59,7 @@
         @error('description')
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
-
+        
         <img class="w-44 border-2 border-red-300 my-1 p-1" src="{{ asset('images/products/'.$product->photopath) }}" alt="">
 
         <input type="file" name="photopath" class="w-full rounded-lg border-2 border-red-300 my-2">

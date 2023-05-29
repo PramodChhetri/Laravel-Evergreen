@@ -16,7 +16,13 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('image')->default('images/users/default/default.jpg')->nullable();
+            $table->string('panimage')->nullable();
+            $table->integer('status')->default(1)->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('pan_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

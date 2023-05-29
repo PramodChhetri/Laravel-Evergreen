@@ -8,6 +8,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FrontendController;
 use App\Models\User;
 use App\Models\Role;
 
@@ -24,7 +25,12 @@ use App\Models\Role;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+
+Route::get('/about', function () {
+    return view('about');
 });
 
 Route::get('/dashboard', function () {
@@ -32,6 +38,13 @@ Route::get('/dashboard', function () {
     return view('dashboard',compact('users'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware(['auth','verified'])->group(function(){
+    Route::get('/user', [FrontendController::class, 'index'])->name('user.index');
+    Route::get('/user/products', [FrontendController::class, 'products'])->name('user.products');
+    Route::get('/user/{id}/productdetail',[FrontendController::class,'productdetail'])->name('user.productdetail');
+
+
+});
 
 // Role and Permission
 Route::middleware(['auth','role:admin'])->group(function(){

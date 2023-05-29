@@ -73,7 +73,8 @@ class ProductController extends Controller
             $name = time().'.'.$image->getClientOriginalExtension();
             $destinationPath = public_path('/images/products');
             $image->move($destinationPath,$name);
-            File::delete(public_path('images/products/'.$product->photopath));
+            unlink('images/products/'.$product->photopath);
+            // File::delete(public_path('images/products/'.$product->photopath));
             $data['photopath'] = $name;
         }
 
@@ -81,16 +82,10 @@ class ProductController extends Controller
         return redirect(route('products.index'))->with('success','Product Updated Successfully');
     }
 
-    // public function destroy($id)
-    // {
-    //     $category = Category::find($id);
-    //     $category->delete();
-    //     return redirect(route('category.index'));
-    // }
-
     public function destroy(Request $request)
     {
         $product = Product::find($request->dataid);
+        unlink('images/products/'.$product->photopath);
         $product->delete();
         return redirect(route('products.index'))->with('success','Product Deleted Successfully!');
     }

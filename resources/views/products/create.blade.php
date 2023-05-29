@@ -42,10 +42,10 @@
             @endif
             value="New">New</option>
             <option
-            @if (old('condition') == "Fairly New")
+            @if (old('condition') == "FairlyNew")
                 {{"selected"}}
             @endif
-            value="Fairly New">Fairly New</option>
+            value="FairlyNew">Fairly New</option>
             <option
             @if (old('condition') == "Old")
                 {{"selected"}}
