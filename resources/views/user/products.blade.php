@@ -44,9 +44,12 @@
           </a>
           <h4>{{$product->name}}</h4>
           <p>Rs. {{$product->price}}</p>
-          <a href="{{ asset('images/products/'.$product->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$product->name}}"><i class='bx bx-zoom-in'></i></i></a>
-          <a href="#" class="details-link"><i class="bx bx-plus"></i></a>
-          
+          <div style="display:flex;">
+            <a href="{{ asset('images/products/'.$product->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$product->name}}"><i class='bx bx-zoom-in'></i></i></a>
+            <input type="number" value="1" id="products-quantity">
+          <i class="bx bx-plus" id="product-plus-icon" style=""></i>
+          </div>
+  
         </div>
       </div>   
 

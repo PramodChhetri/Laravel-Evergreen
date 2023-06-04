@@ -46,4 +46,11 @@ class AllUserController extends Controller
         User::create($data);
         return redirect(route('allusers.index'))->with('success','User Created Successfully');
     }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        $roles = Role::all();
+        return view('allusers.edit',compact('user','roles'));
+    }
 }

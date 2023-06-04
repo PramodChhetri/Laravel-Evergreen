@@ -1003,9 +1003,35 @@ section {
 .portfolio .portfolio-item .portfolio-info .preview-link,
 .portfolio .portfolio-item .portfolio-info .details-link {
   position: absolute;
-  right: 40px;
+  right: 20px;
   font-size: 24px;
   top: calc(50% - 18px);
+  color: #fff;
+  transition: 0.3s;
+}
+
+.portfolio .portfolio-item .portfolio-info #products-quantity{
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  outline-color: #283a5ae6;
+  width: 2.4rem;
+  height: 1.7rem;
+  background-color: #283a5ae6;
+  position: absolute;
+  right: 80px;
+  color: #fff;
+  font-size: 24px;
+  top: calc(50% - 14px);
+  transition: 0.3s;
+}
+
+.portfolio .portfolio-item .portfolio-info #product-plus-icon{
+  position: absolute;
+  right: 50px;
+  font-size: 24px;
+  top: calc(50% - 14px);
   color: #fff;
   transition: 0.3s;
 }

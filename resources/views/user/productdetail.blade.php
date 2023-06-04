@@ -57,6 +57,7 @@
               <li><strong>Detail</strong>: {{$product->description}}</li>
             </ul>
             <p class="fs-5 text-danger">
+              <input type="number" value="1" class="cart-quantity">
               <a href="#" class="text-success" ><i class="bx bx-plus"></i> Add to Card</a>
             </p>
           </div>

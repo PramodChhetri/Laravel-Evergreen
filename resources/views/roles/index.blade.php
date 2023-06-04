@@ -15,7 +15,7 @@
         <thead>
             <th>Id</th>
             <th>Name</th>
-            <th>Created At</th>
+            <th>Permissions</th>
             <th>Updated At</th>
             <th>Action</th>
         </thead>
@@ -25,7 +25,11 @@
             <tr>
                 <td>{{$role->id}}</td>
                 <td>{{$role->name}}</td>
-                <td>{{$role->created_at->diffForHumans()}}</td>
+                <td> @forelse ($role->permissions as $rp)
+                    <span class="bg-green-600 text-white px-2 py-1 rounded">{{$rp->name}}</span>
+                    @empty
+                    <span class="bg-red-400 text-white px-2 py-1 rounded">No Permissions</span>
+                    @endforelse</td>
                 <td>{{$role->updated_at->diffForHumans()}}</td>
                 <td>
                     @if (!(Auth::user()->hasRole($role->name)))
@@ -60,7 +64,11 @@
     </div>
 
     <script>
-        let table = new DataTable('#mytable');
+        $('#mytable').dataTable( {
+  "columnDefs": [
+    { "width": "50%", "targets": 2 }
+  ]
+} );
     </script>
 
     <script>

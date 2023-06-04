@@ -1,4 +1,4 @@
-@extends('layouts.master_innerpage')
+@extends('layouts.homemaster_innerpage')
 @section('content')
 
        <!-- ======= Breadcrumbs ======= -->

@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Role;
 
@@ -25,7 +26,8 @@ use App\Models\Role;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $products = Product::latest()->paginate(8);
+    return view('home',compact('products'));
 });
 
 
@@ -36,12 +38,13 @@ Route::get('/about', function () {
 Route::get('/dashboard', function () {
     $users = User::all();
     return view('dashboard',compact('users'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified','role:admin'])->name('dashboard');
 
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user', [FrontendController::class, 'index'])->name('user.index');
     Route::get('/user/products', [FrontendController::class, 'products'])->name('user.products');
     Route::get('/user/{id}/productdetail',[FrontendController::class,'productdetail'])->name('user.productdetail');
+    Route::get('/user/buyersell',[FrontendController::class,'buyersell'])->name('user.buyersell');
 
 
 });
@@ -84,6 +87,7 @@ Route::middleware('auth')->group(function () {
     // All Users
     Route::get('/allusers', [AllUserController::class, 'index'])->name('allusers.index');
     Route::get('/allusers/create', [AllUserController::class, 'create'])->name('allusers.create');
+    Route::get('/allusers/{id}/edit',[AllUserController::class,'edit'])->name('allusers.edit');
 
     // Category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');

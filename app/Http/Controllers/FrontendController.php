@@ -25,4 +25,9 @@ class FrontendController extends Controller
         $product = Product::find($id);
         return view('user.productdetail',compact('product'));
     }
+
+    public function buyersell()
+    {
+        return view('user.buyersell');
+    }
 }
