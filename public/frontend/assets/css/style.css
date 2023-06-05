@@ -1027,14 +1027,21 @@ section {
   transition: 0.3s;
 }
 
-.portfolio .portfolio-item .portfolio-info #product-plus-icon{
+.portfolio .portfolio-item .portfolio-info #add-to-cart{
   position: absolute;
   right: 50px;
-  font-size: 24px;
   top: calc(50% - 14px);
-  color: #fff;
   transition: 0.3s;
+  font-weight: bold;
+  height: 1.7rem;
+  width: 1.7rem;
+  background-color: #283a5ae6;
+  color: white;
+  border: 1px solid #fff;
+  border-radius: 5px;
 }
+
+
 
 .portfolio .portfolio-item .portfolio-info .preview-link:hover,
 .portfolio .portfolio-item .portfolio-info .details-link:hover {
@@ -1850,6 +1857,37 @@ section {
   }
 }
 
+/* Side Bar */
+ /* Custom styles for the sidebar */
+ .sidebar {
+  min-height: 100vh;
+  background-color: #fff;
+  border-right: 2px solid #dee2e6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul.navbar-nav {
+  flex-direction: column;
+}
+
+.sidebar .nav-link {
+  color: #283a5ae6;
+  font-weight: bold;
+  font-size: 18px;
+  border-bottom: 2px solid #dee2e6;
+
+}
+
+.sidebar .nav-link:hover {
+  color: #fff;
+  background-color: #283a5ae6;
+}
+
+/* Custom styles for the content area */
+.content {
+  padding: 20px;
+}
+
 /* Cart Section Starts */
 #cart-icon{
   color:white;
@@ -1859,7 +1897,7 @@ section {
 }
 
 .cart{
-  position: fixed;
+  position:absolute;
   top: 0;
   right: -100%;
   width: 360px;
@@ -1868,6 +1906,7 @@ section {
   background: #f3f5fa;
   box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
   transition: 0.3s;
+  overflow-y: auto;
 }
 
 .cart.active{

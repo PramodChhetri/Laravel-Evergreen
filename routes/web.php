@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\CartController;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Role;
@@ -43,9 +44,15 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user', [FrontendController::class, 'index'])->name('user.index');
     Route::get('/user/products', [FrontendController::class, 'products'])->name('user.products');
+    Route::get('/user/productslive', [FrontendController::class, 'productslive'])->name('user.productslive');
     Route::get('/user/{id}/productdetail',[FrontendController::class,'productdetail'])->name('user.productdetail');
     Route::get('/user/buyersell',[FrontendController::class,'buyersell'])->name('user.buyersell');
 
+    // Cart and Orders
+    Route::get('/user/orders/',[FrontendController::class,'orders'])->name('user.orders.index');
+    Route::get('/user/orders/cart',[CartController::class,'index'])->name('user.orders.cart');
+    Route::post('/user/orders/cart/store',[CartController::class,'store'])->name('user.orders.cart.store');
+    
 
 });
 
