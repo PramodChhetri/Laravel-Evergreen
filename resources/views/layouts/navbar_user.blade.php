@@ -40,7 +40,8 @@
 
       {{-- Cart --}}
       <div class="cart">
-        <h2 class="cart-title">YOUR CART</h2>
+        <div class="cart-container">
+          <h2 class="cart-title">YOUR CART</h2>
         @php
             $sum = 0
         @endphp
@@ -59,6 +60,7 @@
             </div>
             {{-- Remove Cart --}}
             <i class='bx bxs-trash-alt cart-remove' ></i>
+        </div>
           </div>
             
         @endforeach

@@ -9,6 +9,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  @livewireStyles
+
   <!-- Favicons -->
   <link href="{{asset('frontend/assets/img/favicon.png')}}" rel="icon">
   <link href="{{asset('frontend/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
@@ -43,7 +45,7 @@
 @include('layouts.navbar_user')
 
   <main id="main">
-
+     
     @yield('content')
 
 </main><!-- End #main -->
@@ -128,6 +130,8 @@
 
 <!-- Template Main JS File -->
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+
+@livewireScripts
 
 </body>
 

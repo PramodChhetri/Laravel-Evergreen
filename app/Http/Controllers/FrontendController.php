@@ -25,9 +25,9 @@ class FrontendController extends Controller
 
     public function productslive()
     {
-        $products = Product::all();
+        
         $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.productslive',compact('products','carts'));
+        return view('user.productslive',compact('carts'));
     }
 
     public function productdetail($id)
