@@ -17,6 +17,7 @@ class ProductFilter extends Component
     public $condition = [];
     public $minprice;
     public $maxprice;
+    public $priceOrder;
 
     public function mount()
     {
@@ -59,6 +60,10 @@ class ProductFilter extends Component
             $query = $query->where('price', '>=', $this->minprice);
         } elseif (!empty($this->maxprice)) {
             $query = $query->where('price', '<=', $this->maxprice);
+        }
+
+        if($this->priceOrder){
+            $query->orderBy('price', $this->priceOrder);
         }
 
         return $query->paginate(5);

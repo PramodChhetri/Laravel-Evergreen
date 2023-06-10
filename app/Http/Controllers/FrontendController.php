@@ -11,41 +11,36 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
         $products = Product::latest()->paginate(8);
-        return view('user.index',compact('products','carts'));
+        return view('user.index',compact('products'));
     }
 
     public function products()
     {
         $products = Product::all();
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.products',compact('products','carts'));
+        return view('user.products',compact('products'));
     }
 
     public function productslive()
     {
         
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.productslive',compact('carts'));
+        return view('user.productslive');
     }
 
     public function productdetail($id)
     {
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
         $product = Product::find($id);
-        return view('user.productdetail',compact('product','carts'));
+        $relatedproducts = Product::where('category_id', '=', $product->category_id)->paginate(3);
+        return view('user.productdetail',compact('product','relatedproducts'));
     }
 
     public function buyersell()
     {
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.buyersell',compact('carts'));
+        return view('user.buyersell');
     }
 
     public function orders()
     {
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.orders.index',compact('carts'));
+        return view('user.orders.index');
     }
 }

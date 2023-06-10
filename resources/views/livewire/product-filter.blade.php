@@ -31,6 +31,15 @@
           </div>
 
           <div class="form-group">
+            <label for="price-order">Price Order:</label>
+            <select wire:model="priceOrder" class="form-control" id="price-order">
+              <option value="">None</option>
+              <option value="asc">Low to High</option>
+              <option value="desc">High to Low</option>
+            </select>
+          </div>
+
+          <div class="form-group">
             <label for="category">Category:</label>
             <div>
                 <div class="checkbox-group">
@@ -83,8 +92,6 @@
  <!-- ======= Portfolio Section ======= -->
  <section id="portfolio" class="portfolio">
     <div class="container">
-  
-      <div>
         <div class="row portfolio-container" >  {{-- data-aos="fade-up" --}}
    
             @foreach ($products as $product)
@@ -119,12 +126,9 @@
             svg{
               width: 20px;
             }
-          </style>
-  
+          </style>   
     </div>
-    
-     
-  
-    </div>
+
+  </section>
 </div>
 </div>

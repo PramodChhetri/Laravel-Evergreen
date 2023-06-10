@@ -57,24 +57,28 @@
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
   
             @foreach ($products as $product)
-
-      <div class="col-lg-4 col-md-6 portfolio-item filter-{{$product->condition}}">
-        <a href="{{route('user.productdetail',$product->id)}}">
-          <div class="portfolio-img"><img src="{{ asset('images/products/'.$product->photopath) }}" class="img-fluid" alt=""></div>
-          <div class="portfolio-info">
-          </a>
-          <h4>{{$product->name}}</h4>
-          <p>Rs. {{$product->price}}</p>
-          <div style="display:flex;">
-            <a href="{{ asset('images/products/'.$product->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$product->name}}"><i class='bx bx-zoom-in'></i></i></a>
-            <input type="number" value="1" id="products-quantity">
-          <i class="bx bx-plus" id="product-plus-icon" style=""></i>
-          </div>
-          
-        </div>
-      </div>   
-
-      @endforeach
+      
+            <div class="col-lg-4 col-md-6 portfolio-item filter-{{$product->condition}}">
+              <a href="{{route('user.productdetail',$product->id)}}">
+                <div class="portfolio-img"><img src="{{ asset('images/products/'.$product->photopath) }}" class="img-fluid" alt=""></div>
+                <div class="portfolio-info">
+                </a>
+                <h4>{{$product->name}}</h4>
+                <p>Rs. {{$product->price}} (Available: {{$product->stock}})</p>
+                <div style="display:flex;">
+                  <a href="{{ asset('images/products/'.$product->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$product->name}}" style="height: 45px"><i class='bx bx-zoom-in'></i></i></a>
+                  <form action="{{route('user.orders.cart.store')}}" method="POST">
+                    @csrf
+                  <input type="hidden" name="product_id" value="{{$product->id}}"> 
+                  <input type="number" name="quantity" value="1" id="products-quantity">
+                  <button type="submit" id="add-to-cart">+</button>
+                  </form>
+                </div>
+        
+              </div>
+            </div>   
+      
+            @endforeach
   
           </div>
   
