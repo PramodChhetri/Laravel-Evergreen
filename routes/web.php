@@ -10,6 +10,7 @@ use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\SellController;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Role;
@@ -47,6 +48,12 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user/productslive', [FrontendController::class, 'productslive'])->name('user.productslive');
     Route::get('/user/{id}/productdetail',[FrontendController::class,'productdetail'])->name('user.productdetail');
     Route::get('/user/buyersell',[FrontendController::class,'buyersell'])->name('user.buyersell');
+    Route::get('/user/sellersell',[FrontendController::class,'sellersell'])->name('user.sellersell');
+
+    // Sell
+    Route::get('/user/sell/',[SellController::class,'index'])->name('user.sell.index');
+    Route::get('/user/sell/manageproducts',[SellController::class,'manageproducts'])->name('user.sell.manageproducts');
+    Route::get('/user/sell/managestocks',[SellController::class,'managestocks'])->name('user.sell.managestocks');
 
     // Cart and Orders
     Route::get('/user/orders/',[FrontendController::class,'orders'])->name('user.orders.index');

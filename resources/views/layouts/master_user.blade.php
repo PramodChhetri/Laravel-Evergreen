@@ -31,6 +31,12 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
 
+  <!-- JQuery Table Script -->
+  <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
+  <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
+  <script src="{{asset('datatable/datatables.js')}}"></script>
+
+
   <!-- =======================================================
   * Template Name: Arsha
   * Updated: Mar 10 2023 with Bootstrap v5.2.3

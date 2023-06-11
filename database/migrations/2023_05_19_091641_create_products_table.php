@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('condition');
             $table->string('brand');
             $table->text('description');
+            $table->integer('totalsells')->nullable();
             $table->timestamps();
         });
     }

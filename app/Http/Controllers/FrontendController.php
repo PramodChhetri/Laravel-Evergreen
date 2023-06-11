@@ -39,6 +39,11 @@ class FrontendController extends Controller
         return view('user.buyersell');
     }
 
+    public function sellersell()
+    {
+        return view('user.sellersell');
+    }
+
     public function orders()
     {
         return view('user.orders.index');

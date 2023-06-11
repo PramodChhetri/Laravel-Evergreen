@@ -7,17 +7,19 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Sell Products</h2>
+        <h2>Seller Center</h2>
         <ol>
-          <li><a href="{{route('user.index')}}">Home</a></li>
-          <li>Sell Products</li>
+          <li><a href="{{route('user.sell.index')}}">Home</a></li>
+          <li>Seller Center</li>
         </ol>
       </div>
 
     </div>
   </section>
 
-@if (Auth::user()->role->permissions()->where("name","sell-product")->count() != 0)
+  
+
+@if (Auth::user()->role->permissions()->where("name","sell-products")->count() != 0)
 <section id="services" class="services">
   <div class="container" data-aos="fade-up">
 
@@ -97,6 +99,8 @@
 
   </div>
 </section>
+
+<section>
 
 <livewire:before-verification /> 
 

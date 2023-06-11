@@ -1704,11 +1704,13 @@ section {
   background: #f3f5fa;
   box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
   transition: 0.3s;
+  overflow-x: hidden;
 
 }
 
 .cart-container {
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: 100vh;
   padding: 20px;
 
@@ -1910,9 +1912,58 @@ section {
   border: 1px solid #ccc;
 }
 
+/* SEll */
+.btn-add{
+  padding: 10px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #283a5ae6;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.btn-add:hover{
+  background: lightblue;
+  color: var(--text-color);
+}
 
+.btn-action{
+  padding: 5px 10px;
+  border: none;
+  background: #283a5ae6;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.btn-action:hover{
+  background: lightblue;
+  color: var(--text-color);
+}
+
+#edit-stock{
+  border: 2px solid #283a5ae6;
+  border-radius: 4px;
+  outline-color: #283a5ae6;
+  width: 4rem;
+  height: 2rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.get-started{
+  color: #283a5ae6;
+  font-weight: bold;
+
+}
+
+.get-started:hover{
+  color: rgb(8, 178, 235);
+  font-weight: bolder;
+}
 
 
 
