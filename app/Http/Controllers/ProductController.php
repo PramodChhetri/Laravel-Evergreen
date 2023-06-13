@@ -89,4 +89,22 @@ class ProductController extends Controller
         $product->delete();
         return redirect(route('products.index'))->with('success','Product Deleted Successfully!');
     }
+
+    // STOCK
+    public function stockindex()
+    {
+        $allproducts = Product::all();
+        return view('stock.index',compact('allproducts'));
+    }
+
+    public function stockupdate(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $data = $request->validate([
+            'stock' => 'numeric|required',
+        ]);
+
+        $product->update($data);
+        return redirect(route('stock.index'))->with('success','Stock Updated Successfully');
+    }
 }

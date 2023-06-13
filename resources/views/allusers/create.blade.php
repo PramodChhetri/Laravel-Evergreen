@@ -2,7 +2,7 @@
 @section('content')
 <h2 class="font-bold text-4xl text-black-700">Add User</h2> 
 <div class="rounded-lg border-4 border-green-500 my-2 py-2 px-2">
-    <form action="" method="POST" class="mt-5" enctype="multipart/form-data">
+    <form action="{{route('allusers.store')}}" method="POST" class="mt-5" enctype="multipart/form-data">
         @csrf
         <select name="role_id" id="" class="w-full rounded-lg border-2 border-red-300 my-2">
             <option value="" disabled selected hidden >Select Role</option>
@@ -19,10 +19,10 @@
         @enderror
 
         <div class=" rounded-lg border-2 border-red-300">
-        <label for="photopath" class="w-full my-2"> Select Profile Photo</label>
-        <input type="file" name="photopath" class="w-full border-2 border-gray-400 my-2">
+        <label for="image" class="w-full my-2"> Select Profile Photo</label>
+        <input type="file" name="image" class="w-full border-2 border-gray-400 my-2">
         </div>
-        @error('photopath')
+        @error('image')
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
@@ -41,8 +41,8 @@
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
-        <input type="password" placeholder="Confirm Password" name="confirm-password" class="w-full rounded-lg border-2 border-red-300 my-2" value="{{old('confirm-password')}}">
-        @error('confirm-password')
+        <input type="password" placeholder="Confirm Password" name="password_confirmation" class="w-full rounded-lg border-2 border-red-300 my-2" value="{{old('password_confirmation')}}">
+        @error('password_confirmation')
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
@@ -63,8 +63,8 @@
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
-        <input type="text" placeholder="Contact Number" name="contact" class="w-full rounded-lg border-2 border-red-300 my-2" value="{{old('contact')}}">
-        @error('contact')
+        <input type="text" placeholder="Contact Number" name="phone" class="w-full rounded-lg border-2 border-red-300 my-2" value="{{old('phone')}}">
+        @error('phone')
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
@@ -73,8 +73,21 @@
             <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
         @enderror
 
+        <div class=" rounded-lg border-2 border-red-300">
+            <label for="panimage" class="w-full my-2"> PAN Photo ( Optional ) </label>
+            <input type="file" name="panimage" class="w-full border-2 border-gray-400 my-2">
+            </div>
+            @error('panimage')
+                <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
+            @enderror
+    
+            <input type="text" placeholder="PAN Number ( Optional )" name="pannumber" class="w-full rounded-lg border-2 border-red-300 my-2" value="{{old('pannumber')}}">
+            @error('pannumber')
+                <p class="text-red-400 text-xs -mt-2">{{$message}}</p>
+            @enderror
+
         <div class="flex">
-            <input type="submit" class="bg-blue-600 text-white px-4 py-2 mx-2 rounded-lg" value="Add Product">
+            <input type="submit" class="bg-blue-600 text-white px-4 py-2 mx-2 rounded-lg" value="Add User">
 
             <a href="{{route('allusers.index')}}" class="bg-red-600 text-white px-10 py-2 mx-2 rounded-lg">Exit</a>
         </div>

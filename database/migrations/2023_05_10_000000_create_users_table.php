@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->string('image')->default('images/users/default/default.jpg')->nullable();
+            $table->string('image')->default('default.jpg')->nullable();
             $table->string('pannumber')->nullable();
             $table->string('panimage')->nullable();
             $table->integer('status')->default(1)->nullable();

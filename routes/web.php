@@ -101,7 +101,10 @@ Route::middleware('auth')->group(function () {
     // All Users
     Route::get('/allusers', [AllUserController::class, 'index'])->name('allusers.index');
     Route::get('/allusers/create', [AllUserController::class, 'create'])->name('allusers.create');
+    Route::post('/allusers/store',[AllUserController::class,'store'])->name('allusers.store');
     Route::get('/allusers/{id}/edit',[AllUserController::class,'edit'])->name('allusers.edit');
+    Route::post('/allusers/{id}/update',[AllUserController::class,'update'])->name('allusers.update');
+    Route::post('/allusers/destroy',[AllUserController::class,'destroy'])->name('allusers.destroy');
 
     // Category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
@@ -119,6 +122,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('products.edit');
     Route::post('/products/{id}/update',[ProductController::class,'update'])->name('products.update');
     Route::post('/products/destroy',[ProductController::class,'destroy'])->name('products.destroy');
+
+    // Stock
+    Route::get('/stock', [ProductController::class, 'stockindex'])->name('stock.index');
+    Route::post('/stock/{id}/update',[ProductController::class,'stockupdate'])->name('stock.update');
 
 });                                                 
 

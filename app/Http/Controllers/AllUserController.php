@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
 
@@ -26,21 +25,31 @@ class AllUserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'role_id' => 'numeric|required',
-            'status' => 'numeric|required',
-            'description' => 'required',
+            'email' => 'required|unique:users',
+            'role_id' => 'required|numeric',
+            'image' => 'nullable',
+            'password' => 'required|confirmed',
+            'status' => 'required|numeric',
             'phone' => 'required',
             'address' => 'required',
-            'photopath' => 'nullable'
+            'panimage' => 'nullable',
+            'pannumber' => 'nullable',
         ]);
 
-        if($request->hasFile('photopath')){
-            $image = $request->file('photopath');
+        if($request->hasFile('image')){
+            $image = $request->file('image');
             $name = time().'.'.$image->getClientOriginalExtension();
             $destinationPath = public_path('/images/users');
             $image->move($destinationPath,$name);
-            $data['photopath'] = $name;
+            $data['image'] = $name;
+        }
+
+        if($request->hasFile('panimage')){
+            $panimage = $request->file('panimage');
+            $name = time().'.'.$panimage->getClientOriginalExtension();
+            $destinationPath = public_path('/images/pan');
+            $panimage->move($destinationPath,$name);
+            $data['panimage'] = $name;
         }
 
         User::create($data);
@@ -52,5 +61,49 @@ class AllUserController extends Controller
         $user = User::find($id);
         $roles = Role::all();
         return view('allusers.edit',compact('user','roles'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$user->id,
+            'role_id' => 'required|numeric',
+            'image' => 'nullable',
+            'status' => 'required|numeric',
+            'phone' => 'required',
+            'address' => 'required',
+            'panimage' => 'nullable',
+            'pannumber' => 'nullable',
+        ]);
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/users');
+            $image->move($destinationPath,$name);
+            $data['image'] = $name;
+        }
+
+        if($request->hasFile('panimage')){
+            $panimage = $request->file('panimage');
+            $name = time().'.'.$panimage->getClientOriginalExtension();
+            $destinationPath = public_path('/images/pan');
+            $panimage->move($destinationPath,$name);
+            $data['panimage'] = $name;
+        }
+
+        $user->update($data);
+        return redirect(route('allusers.index'))->with('success','User Updated Successfully');
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = User::find($request->dataid);
+        unlink('images/users/'.$user->image);
+        unlink('images/pan/'.$user->panimage);
+        $user->delete();
+        return redirect(route('allusers.index'))->with('success','User Deleted Successfully!');
     }
 }

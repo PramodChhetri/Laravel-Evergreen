@@ -29,7 +29,7 @@
 
     </div>
 
-    <div class="my-4"><img src="{{Auth::user()->image}}" alt=""></div>
+    <div class="my-4"><img src="/images/users/{{Auth::user()->image}}" alt=""></div>
 
 
 @endsection
