@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllUserController;
+use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
@@ -136,6 +137,11 @@ Route::middleware('auth')->group(function () {
     // Stock
     Route::get('/stock', [ProductController::class, 'stockindex'])->name('stock.index');
     Route::post('/stock/{id}/update',[ProductController::class,'stockupdate'])->name('stock.update');
+
+    // Approval 
+    Route::get('/approval', [ApprovalController::class, 'index'])->name('approval.index');
+    Route::get('/approval/{id}/update',[ApprovalController::class,'updateuser'])->name('approval.update');
+    Route::post('/approval/destroy',[ApprovalControllerr::class,'destroy'])->name('approval.destroy');
 
 });                                                 
 

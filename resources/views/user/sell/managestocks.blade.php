@@ -34,11 +34,15 @@
       <div class="card" style="background: #f3f5fa">
         <div class="card-body">
             <div class="d-flex justify-content-between">
-                <h2 style="color: #283a5ae6;">Manage Products</h2>
-            <div class="mb-3" style="margin-top: 10px; margin-right:20px;">
-              <a href="#" class="btn-add">Add New Product</a>
+                <h2 style="color: #283a5ae6;">Manage Stock</h2>
             </div>
-            </div>
+
+             <!-- Success Message -->
+        @if(session('success'))
+        <div class="alert alert-success mt-4">
+          {{ session('success') }}
+        </div>
+        @endif
 
             <hr style="border: 1px solid #283a5ae6">
             <!-- Rest of the content -->
@@ -62,10 +66,10 @@
                 <td>{{$product->category->name}}</td>
                 <td>Rs. {{$product->price}}</td>
                 <td>
-                  <form action="">
+                  <form action="{{route('user.sell.managestocks.update',$product->id)}}" method="POST">
                     @csrf
-                    <input type="number" value="{{$product->stock}}" id="edit-stock">
-                    <button type="submit" href="#" class="btn-action">Edit</button>
+                    <input type="number" name="stock" value="{{$product->stock}}" id="edit-stock">
+                    <button type="submit" class="btn-action">Edit</button>
                   </form>
                 </td>
               </tr>

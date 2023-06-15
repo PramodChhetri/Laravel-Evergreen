@@ -26,6 +26,7 @@
                     <div class="flex flex-col">
                     <a href="/dashboard" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white ">Dashboard</a>
                     <a href="{{route('allusers.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Users</a>
+                    <a href="{{route('approval.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Approval Requests</a>
                     <a href="{{route('category.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Categories</a>
                     <a href="{{route('stock.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Stock</a>
                     <a href="{{route('products.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Products</a>

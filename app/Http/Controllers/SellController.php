@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\approval;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -34,6 +35,10 @@ class SellController extends Controller
         }
 
         $user->update($data);
+        approval::create([
+            'user_id' => $user->id, 
+        ]);
+
         return redirect(route('user.sell.index'))->with('success','User Updated Successfully');
     }
 
