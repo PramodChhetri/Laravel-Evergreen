@@ -48,12 +48,22 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user/productslive', [FrontendController::class, 'productslive'])->name('user.productslive');
     Route::get('/user/{id}/productdetail',[FrontendController::class,'productdetail'])->name('user.productdetail');
     Route::get('/user/buyersell',[FrontendController::class,'buyersell'])->name('user.buyersell');
-    Route::get('/user/sellersell',[FrontendController::class,'sellersell'])->name('user.sellersell');
+    Route::post('/user/buyersell/{id}/update', [FrontendController::class, 'updatepan'])->name('user.buyersell.update');
 
-    // Sell
+
+    // Sell 
     Route::get('/user/sell/',[SellController::class,'index'])->name('user.sell.index');
-    Route::get('/user/sell/manageproducts',[SellController::class,'manageproducts'])->name('user.sell.manageproducts');
+    Route::post('/user/sell/{id}/updatepan', [SellController::class, 'updatepan'])->name('user.sell.updatepan');
+    // Manage Stock
     Route::get('/user/sell/managestocks',[SellController::class,'managestocks'])->name('user.sell.managestocks');
+    Route::post('/user/sell/managestocks/{id}/update',[SellController::class,'stockupdate'])->name('user.sell.managestocks.update');
+    // Manage Products
+    Route::get('/user/sell/manageproducts',[SellController::class,'manageproducts'])->name('user.sell.manageproducts');
+    Route::get('/user/sell/manageproducts/create', [SellController::class, 'create'])->name('user.sell.manageproducts.create');
+    Route::post('/user/sell/manageproducts/store',[SellController::class,'store'])->name('user.sell.manageproducts.store');
+    Route::get('/user/sell/manageproducts/{id}/edit',[SellController::class,'edit'])->name('user.sell.manageproducts.edit');
+    Route::post('/user/sell/manageproducts/{id}/update',[SellController::class,'update'])->name('user.sell.manageproducts.update');
+    Route::post('/user/sell/manageproducts/destroy',[SellController::class,'destroy'])->name('user.sell.manageproducts.destroy');
 
     // Cart and Orders
     Route::get('/user/orders/',[FrontendController::class,'orders'])->name('user.orders.index');

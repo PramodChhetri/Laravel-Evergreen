@@ -19,7 +19,9 @@
 
   
 
-@if (Auth::user()->role->permissions()->where("name","sell-products")->count() != 0)
+@if (Auth::user()->role->permissions()->where("name","sell-products")->count() == 0)
+
+@if (Auth::user()->panimage == Null)
 <section id="services" class="services">
   <div class="container" data-aos="fade-up">
 
@@ -100,13 +102,14 @@
   </div>
 </section>
 
-<section>
+
 
 <livewire:before-verification /> 
 
-</section>
+@endif
 
-@if (Auth::user()->PAN == Null)
+
+@if (Auth::user()->panimage != Null)
     
 <section>
   <div class="row justify-content-center" id="submission-message">
@@ -132,20 +135,27 @@
           <div class="form-wrapper">
             <div class="form-group">
               <label for="address">Address:</label>
-              <div class="form-control" id="address">Enter your address</div>
+              <div class="form-control" id="address">{{Auth::user()->address}}</div>
             </div>
             <div class="form-group">
               <label for="contact">Contact:</label>
-              <div class="form-control" id="contact">Enter your contact number</div>
+              <div class="form-control" id="contact">{{Auth::user()->phone}}</div>
             </div>
             <div class="form-group">
               <label for="pan-no">PAN No:</label>
-              <div class="form-control" id="pan-no">Enter your PAN number</div>
+              <div class="form-control" id="pan-no">{{Auth::user()->pannumber}}</div>
             </div>
-            <div class="form-group">
-              <label for="pan-photo">PAN Photo:</label>
-              <img src="" alt="">
-            </div>
+            <div class="form-group mb-4">
+              <label for="pan-no">PAN Image:</label>
+              <div class="product-image-preview">
+              @if (Auth::user()->panimage)
+              <img src="{{ asset('images/pan/'.Auth::user()->panimage) }}" alt="Product Image" class="img-fluid">
+              @else
+              <span>No image available</span>
+              @endif
+              </div>
+          </div>
+    
           </div>
         </div>
         

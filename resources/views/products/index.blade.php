@@ -18,7 +18,6 @@
             <th>Image</th>
             <th>Name</th>
             <th>Category</th>
-            <th>Stock</th>
             <th>Price</th>
             <th>Condition</th>
             <th>Created At</th>
@@ -32,7 +31,6 @@
                 <td><img class="w-44" src="{{ asset('images/products/'.$product->photopath) }}" alt=""></td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->category->name}}</td>
-                <td>{{$product->stock}}</td>
                 <td>{{$product->price}}</td>
                 <td>{{$product->condition}}</td>
                 <td>@if ($product->created_at == NULL)

@@ -101,7 +101,9 @@ class AllUserController extends Controller
     public function destroy(Request $request)
     {
         $user = User::find($request->dataid);
+        if($user->image!="default.jpg"){
         unlink('images/users/'.$user->image);
+        }
         unlink('images/pan/'.$user->panimage);
         $user->delete();
         return redirect(route('allusers.index'))->with('success','User Deleted Successfully!');

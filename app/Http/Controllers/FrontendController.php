@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -21,12 +22,6 @@ class FrontendController extends Controller
         return view('user.products',compact('products'));
     }
 
-    public function productslive()
-    {
-        
-        return view('user.productslive');
-    }
-
     public function productdetail($id)
     {
         $product = Product::find($id);
@@ -37,6 +32,28 @@ class FrontendController extends Controller
     public function buyersell()
     {
         return view('user.buyersell');
+    }
+
+    public function updatepan(Request $request, $id)
+    {
+        $user = User::find($id);
+        $data = $request->validate([
+            'phone' => 'required',
+            'address' => 'required',
+            'panimage' => 'required',
+            'pannumber' => 'required',
+        ]);
+
+        if($request->hasFile('panimage')){
+            $panimage = $request->file('panimage');
+            $name = time().'.'.$panimage->getClientOriginalExtension();
+            $destinationPath = public_path('/images/pan');
+            $panimage->move($destinationPath,$name);
+            $data['panimage'] = $name;
+        }
+
+        $user->update($data);
+        return redirect(route('user.buyersell'))->with('success','User Updated Successfully');
     }
 
     public function sellersell()

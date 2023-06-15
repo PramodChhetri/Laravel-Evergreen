@@ -22,13 +22,22 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|unique:categories|max:255',
-            'priority' => 'required|numeric'
+            'priority' => 'required|numeric',
+            'photopath' => 'required'
         ],
         [
             'name.required' => 'Please Enter Category Name',
             'priority.required' => 'Please Enter Periority',
         ]
-    );
+        );
+
+        if($request->hasFile('photopath')){
+            $image = $request->file('photopath');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/categories');
+            $image->move($destinationPath,$name);
+            $data['photopath'] = $name;
+        }
 
         Category::create($data);
         return redirect(route('category.index'))->with('success','Category Created Successfully!');
@@ -45,8 +54,18 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $data = $request->validate([
             'name' => 'required|max:255|unique:categories,name,'.$category->id,
-            'priority' => 'required|numeric'
+            'priority' => 'required|numeric',
+            'photopath' => 'nullable'
         ]);
+
+        if($request->hasFile('photopath')){
+            $image = $request->file('photopath');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/categories');
+            $image->move($destinationPath,$name);
+            unlink('images/categories/'.$category->photopath);
+            $data['photopath'] = $name;
+        }
 
         $category = Category::find($id);
         $category->update($data);
@@ -63,6 +82,7 @@ class CategoryController extends Controller
     public function destroy(Request $request)
     {
         $category = Category::find($request->dataid);
+        unlink('images/categories/'.$category->photopath);
         $category->delete();
         return redirect(route('category.index'))->with('success','Category Deleted Successfully!');
     }

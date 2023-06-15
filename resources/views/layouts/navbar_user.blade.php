@@ -19,11 +19,12 @@
             </ul>
           </li>
           <li><a href="{{route('user.products')}}">Products</a></li>
-          <li><a href="{{route('user.buyersell')}}">Sell</a></li>
+          <li><a href="{{route('user.sell.index')}}">Sell</a></li>
           <li><a href="{{route('user.orders.index')}}">Orders</a></li>
           <li class="dropdown"><a href="#"><span>{{Auth::user()->name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li class="d-inline-flex"><a href="{{route('profile.edit')}}"><img width="20px" src="{{Auth::user()->image}}" alt="..." class="rounded"><span class="p-1">Profile</span></a></li>
+              <li class="d-inline-flex"><a href="{{route('profile.edit')}}">
+               <span class="p-1">Profile</span></a></li>
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
               <li><a href="" onclick="event.preventDefault();

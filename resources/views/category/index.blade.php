@@ -14,6 +14,7 @@
     <table id="mytable" class="display">
         <thead>
             <th>Priority</th>
+            <th>Image</th>
             <th>Category Name</th>
             <th>Created At</th>
             <th>Updated At</th>
@@ -24,6 +25,7 @@
             @foreach($allcategories as $category)
             <tr>
                 <td>{{$category->priority}}</td>
+                <td><img class="w-44" src="{{ asset('images/categories/'.$category->photopath) }}" alt=""></td>
                 <td>{{$category->name}}</td>
                 <td>{{$category->created_at->diffForHumans()}}</td>
                 <td>{{$category->updated_at->diffForHumans()}}</td>

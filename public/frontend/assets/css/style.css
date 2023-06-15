@@ -1965,7 +1965,101 @@ section {
   font-weight: bolder;
 }
 
+/* ProductForm */
 
+#product-form .btn-submit{
+  display: flex;
+  margin: 1.5rem auto 0 auto;
+  padding: 12px 20px;
+  border: none;
+  background: #283a5ae6;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#product-form .btn-submit:hover{
+  background: lightblue;
+  color: var(--text-color);
+}
+
+#product-form .btn-edit{
+  display: flex;
+  margin: auto 0 0 auto;
+  padding: 12px 30px;
+  border: none;
+  background: #283a5ae6;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#product-form .btn-edit:hover{
+  background: lightblue;
+  color: var(--text-color);
+}
+
+#product-form .form-wrapper {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+#product-form .form-group {
+  margin-bottom: 20px;
+}
+
+#product-form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#product-form .form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#product-form .form-control-file {
+  width: 100%;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#product-form .product-image-preview {
+  height: 300px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+#product-form .product-image-preview img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+/* Delete Modal */
+#deleteModal{
+  backdrop-filter: blur(4px); /* Add blur effect */
+  background-color: rgba(0, 0, 0, 0.2); /* Add semi-transparent background color */
+}
+
+.modal-dialog{
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - (1.75rem * 2)); /* Subtract top and bottom margins */
+}
+
+.modal-content {
+  margin: auto;
+}
 
 
 
