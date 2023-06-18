@@ -56,13 +56,22 @@ class FrontendController extends Controller
         return redirect(route('user.buyersell'))->with('success','User Updated Successfully');
     }
 
-    public function sellersell()
-    {
-        return view('user.sellersell');
-    }
-
     public function orders()
     {
         return view('user.orders.index');
+    }
+
+    public function checkout()
+    {
+        if(!auth()->user())
+        {
+            $itemsincart = 0;
+        }
+        else
+        {
+            $itemsincart = Cart::where('user_id',auth()->user()->id)->count();
+        }
+        $carts = Cart::where('user_id',auth()->user()->id)->get();
+        return view('user.checkout',compact('carts','itemsincart'));
     }
 }

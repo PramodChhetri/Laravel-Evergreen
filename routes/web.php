@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SellController;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Role;
@@ -50,6 +51,8 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user/{id}/productdetail',[FrontendController::class,'productdetail'])->name('user.productdetail');
     Route::get('/user/buyersell',[FrontendController::class,'buyersell'])->name('user.buyersell');
     Route::post('/user/buyersell/{id}/update', [FrontendController::class, 'updatepan'])->name('user.buyersell.update');
+    Route::get('/user/checkout', [FrontendController::class, 'checkout'])->name('user.checkout');
+
 
 
     // Sell 
@@ -66,10 +69,14 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::post('/user/sell/manageproducts/{id}/update',[SellController::class,'update'])->name('user.sell.manageproducts.update');
     Route::post('/user/sell/manageproducts/destroy',[SellController::class,'destroy'])->name('user.sell.manageproducts.destroy');
 
-    // Cart and Orders
+    //Orders
     Route::get('/user/orders/',[FrontendController::class,'orders'])->name('user.orders.index');
+    // Cart
     Route::get('/user/orders/cart',[CartController::class,'index'])->name('user.orders.cart');
     Route::post('/user/orders/cart/store',[CartController::class,'store'])->name('user.orders.cart.store');
+    Route::post('/user/orders/cart/{id}/updatestock',[CartController::class,'updateStock'])->name('user.orders.cart.updatestock');
+    Route::post('/user/orders/cart/destroy',[CartController::class,'destroy'])->name('user.orders.cart.destroy');
+
     
 
 });

@@ -20,7 +20,7 @@
 
 @if (Auth::user()->role->permissions()->where("name","sell-products")->count() == 0)
 
-@if (Auth::user()->panimage == Null)
+@if (!Auth::user()->hasRequest())
 <section id="services" class="services">
 <div class="container" data-aos="fade-up">
 
@@ -105,60 +105,61 @@
 
 <livewire:before-verification /> 
 
-@endif
+@else
 
-
-@if (Auth::user()->panimage != Null)
   
 <section>
-<div class="row justify-content-center" id="submission-message">
-  <div class="col-md-10">
-    <div class="message-wrapper">
-      <h3>Thank you for submitting your details!</h3>
-      <p>Kindly wait for our response. We will review your information and get back to you shortly.</p>
+  <div class="row justify-content-center" id="submission-message">
+    <div class="col-md-10">
+      <div class="message-wrapper">
+        <h3>Thank you for submitting your details!</h3>
+        <p>Kindly wait for our response. We will review your information and get back to you shortly.</p>
+      </div>
     </div>
   </div>
-</div>
-</div>
-
-</section>
-
-<section id="registration" class="registration section-bg">
-<div class="registration">
-  <div class="section-title">
-    <h2>Current Details</h2>
   </div>
-  <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div id="register-business">
-        <div class="form-wrapper">
-          <div class="form-group">
-            <label for="address">Address:</label>
-            <div class="form-control" id="address">{{Auth::user()->address}}</div>
-          </div>
-          <div class="form-group">
-            <label for="contact">Contact:</label>
-            <div class="form-control" id="contact">{{Auth::user()->phone}}</div>
-          </div>
-          <div class="form-group">
-            <label for="pan-no">PAN No:</label>
-            <div class="form-control" id="pan-no">{{Auth::user()->pannumber}}</div>
-          </div>
-          <div class="form-group mb-4">
-            <label for="pan-no">PAN Image:</label>
-            <div class="product-image-preview">
-            <img src="{{ asset('images/pan/'.Auth::user()->panimage) }}" alt="Product Image" class="img-fluid">
-            </div>
-        </div>
   
+  </section>
+  
+  <section id="registration" class="registration section-bg">
+  <div class="registration">
+    <div class="section-title">
+      <h2>Current Details</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div id="register-business">
+          <div class="form-wrapper">
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <div class="form-control" id="address">{{Auth::user()->address}}</div>
+            </div>
+            <div class="form-group">
+              <label for="contact">Contact:</label>
+              <div class="form-control" id="contact">{{Auth::user()->phone}}</div>
+            </div>
+            <div class="form-group">
+              <label for="pan-no">PAN No:</label>
+              <div class="form-control" id="pan-no">{{Auth::user()->pannumber}}</div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="pan-no">PAN Image:</label>
+              <div class="product-image-preview">
+              <img src="{{ asset('images/pan/'.Auth::user()->panimage) }}" alt="Product Image" class="img-fluid">
+              </div>
+          </div>
+    
+          </div>
         </div>
-      </div>
-      
+        
+    </div>
   </div>
-</div>
-</section>
+  </section>
+  
 
 @endif
+
+
 
 @else
 

@@ -13,7 +13,8 @@ class SellController extends Controller
 {
     public function index()
     {       
-        return view('user.sell.index');
+        $userid = Auth::user()->id;
+        return view('user.sell.index',compact('userid'));
     }
 
     public function updatepan(Request $request, $id)

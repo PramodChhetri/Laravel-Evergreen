@@ -35,11 +35,10 @@
         </ul>
     </div>
     <div class="col-md-10 content">
-          <!-- Your page content goes here -->
-          
-    </div>
-    </div>
-</div>
+      
+          </div>
+        </div>
+      </div>
 
 
  

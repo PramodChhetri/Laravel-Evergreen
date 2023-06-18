@@ -57,6 +57,11 @@
               <li><strong>Brand</strong>: {{$product->brand}}</li>
               <li><strong>Detail</strong>: {{$product->description}}</li>
             </ul>
+            @if(session('success'))
+            <div class="alert alert-success mt-4">
+              {{ session('success') }}
+            </div>
+            @endif
             <p class="fs-5 text-danger">
               <form action="{{route('user.orders.cart.store')}}" method="POST">
                 @csrf

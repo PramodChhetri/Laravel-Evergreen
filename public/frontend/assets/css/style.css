@@ -2063,7 +2063,31 @@ section {
 
 
 
+/* Cart Page */
+#edit-cart-stock{
+  border: 2px solid #283a5ae6;
+  border-radius: 4px;
+  outline-color: #283a5ae6;
+  width: 4rem;
+  height: 2rem;
+  text-align: center;
+  font-size: 1rem;
+}
 
+.btn-cart-action{
+  padding: 5px 10px;
+  border: none;
+  background: #283a5ae6;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cart-action:hover{
+  background: lightblue;
+  color: var(--text-color);
+}
 
 
 

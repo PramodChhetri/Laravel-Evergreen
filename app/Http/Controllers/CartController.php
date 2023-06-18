@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,17 @@ class CartController extends Controller
      */
     public function index()
     {
+        if(!auth()->user())
+        {
+            $itemsincart = 0;
+        }
+        else
+        {
+            $itemsincart = Cart::where('user_id',auth()->user()->id)->count();
+        }
+        $categories = Category::orderBy('priority')->get();
         $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.orders.cart',compact('carts'));
+        return view('user.orders.cart',compact('carts','categories','itemsincart'));
     }
 
     /**
@@ -63,19 +73,25 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
+   
+    public function updateStock(Request $request, $id)
     {
-        //
+        $cart = Cart::find($id);
+        $data = $request->validate([
+            'quantity' => 'numeric|required',
+        ]);
+
+        $cart->update($data);
+        return back()->with('success','Quantity Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy(Request $request)
     {
-        //
+        $cart= Cart::find($request->dataid);
+        $cart->delete();
+        return back()->with('success','Cart Deleted Successfully');
     }
 }
