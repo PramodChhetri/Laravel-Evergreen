@@ -10,7 +10,7 @@ class ApprovalController extends Controller
 {
     public function index()
     {
-        $requests = approval::all();
+        $requests = approval::where('status','Pending')->get();
         return view('approval.index',compact('requests'));
     }
 
@@ -22,7 +22,11 @@ class ApprovalController extends Controller
             'role_id' => 2,
             'pan_verified_at' => now(),
         ]);
-        $approvalrequest->delete();
+        
+        $approvalrequest->update([
+            'status' => 'Approved',
+        ]);
+
         return redirect(route('approval.index'))->with('success','User Approved To Sell Products.');
     }
 

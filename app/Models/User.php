@@ -68,8 +68,12 @@ class User extends Authenticatable
 
     public function hasRequest(): bool
     {
-        return $this->approval()->where('user_id', Auth::user()->id)->exists();
+    return $this->approval()->where('user_id', Auth::user()->id)->where('status', 'Pending')->exists();
     }
-      
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'buyer_id');
+    }
 }
 

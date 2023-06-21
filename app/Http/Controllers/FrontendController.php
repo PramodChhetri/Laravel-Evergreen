@@ -29,10 +29,6 @@ class FrontendController extends Controller
         return view('user.productdetail',compact('product','relatedproducts'));
     }
 
-    public function buyersell()
-    {
-        return view('user.buyersell');
-    }
 
     public function updatepan(Request $request, $id)
     {
@@ -56,10 +52,7 @@ class FrontendController extends Controller
         return redirect(route('user.buyersell'))->with('success','User Updated Successfully');
     }
 
-    public function orders()
-    {
-        return view('user.orders.index');
-    }
+    
 
     public function checkout()
     {

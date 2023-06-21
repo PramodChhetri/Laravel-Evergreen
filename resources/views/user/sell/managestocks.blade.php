@@ -27,6 +27,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('user.sell.manageproducts') }}">Manage Products</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('user.sell.orders') }}">Orders</a>
+          </li>
             </ul>
     </div>
     <div class="col-md-10 content">

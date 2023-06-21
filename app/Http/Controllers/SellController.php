@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\approval;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -139,5 +141,47 @@ class SellController extends Controller
 
         $product->update($data);
         return back()->with('success','Stock Updated Successfully');
+    }
+
+    public function orders()
+    {
+        // Retrieve the authenticated buyer's ID
+    $sellerId = auth()->user()->id;
+
+    // Retrieve orders for the specific buyer
+    $orders = Order::with('buyer','orderDetails')
+        ->where('seller_id', $sellerId)
+        ->latest()->get();
+
+    // Pass the list of orders to the seller's dashboard view
+    return view('user.sell.orders', compact('orders'));
+    }
+
+    public function ordersapprove($id)
+    {
+        $orderDetail = OrderDetail::find($id);
+        $quantity = $orderDetail->quantity;
+        $productId = $orderDetail->product_id;
+        $product = Product::find($productId);
+        $stock = $product->stock;
+        
+        if($stock < $quantity){
+        return redirect(route('user.sell.orders'))->with('success','Out of Stock!');
+        }else{
+            $product->update([
+                'stock' => $stock - $quantity
+            ]);
+            $orderDetail->update([
+                'status' => 'Approved'
+            ]);
+        return redirect(route('user.sell.orders'))->with('success','Order Approved Successfully!');
+        }
+    }
+
+    public function ordersdestroy(Request $request)
+    {
+        $orders= OrderDetail::find($request->dataid);
+        $orders->delete();
+        return redirect(route('user.sell.orders'))->with('success','Order Deleted Successfully!');
     }
 }

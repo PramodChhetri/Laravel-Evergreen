@@ -26,15 +26,18 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Billing Details</h3>
-            <form class="needs-validation" novalidate method="POST" action="">
+            <form method="POST" action="{{route('user.orders.store')}}">
               @csrf
               <div class="row">
                 <div class="col-md-12 mb-3">
-                  <label for="Name" class="form-label">First name</label>
-                  <input type="text" class="form-control" id="Name" name="name" placeholder="" value="" required>
-                  <div class="invalid-feedback">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Eg: Axel Blade" value="">
+                  @error('name')
+                  <div class="text text-danger">
                     Valid first name is required.
-                  </div>
+                  </div> 
+                  @enderror
+                  
                 </div>
               </div>
               
@@ -45,55 +48,64 @@
                     <span class="input-group-text">@</span>
                   </div>
                   <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
-                <div class="invalid-feedback">
-                  Please enter a valid email address for shipping updates.
                 </div>
-                </div>
+                @error('email')
+                  <div class="text text-danger">
+                  Please enter a valid email address.
+                  </div>
+                @enderror
               </div>
             
               
               <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
-                <div class="invalid-feedback">
+                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St">
+                @error('address')
+                <div class="text text-danger">
                   Please enter your address.
                 </div>
+                @enderror
               </div>
               
               <div class="mb-3">
                 <label for="contact" class="form-label">Contact Number</span></label>
                 <input type="text" class="form-control" id="contact" name="contact" placeholder="+97798xxxxxxxx or +977xxxxxx">
+                @error('contact')
+                <div class="text text-danger">
+                  Please select a valid Number.
+                </div>
+                @enderror
               </div>
               
               <div class="row">
                 <div class="col-md-5 mb-3">
                   <label for="country" class="form-label">Country</label>
-                  <select class="form-control" id="country" name="country" required>
-                    <option value="">Choose...</option>
-                    <option>Nepal</option>
-                  </select>
-                  <div class="invalid-feedback">
+                  <input type="text" class="form-control" id="country" name="country" placeholder="Eg: Nepal">
+                  @error('country')
+                  <div class="text text-danger">
                     Please select a valid country.
                   </div>
+                  @enderror
                 </div>
                 
                 <div class="col-md-4 mb-3">
                   <label for="state" class="form-label">State</label>
-                  <select class="form-control" id="state" name="state" required>
-                    <option value="">Choose...</option>
-                    <option>Lumbini</option>
-                  </select>
-                  <div class="invalid-feedback">
+                  <input type="text" class="form-control" id="state" name="state" placeholder="Eg: Gandaki">
+                  @error('state')
+                  <div class="text text-danger">
                     Please provide a valid state.
                   </div>
+                  @enderror
                 </div>
                 
                 <div class="col-md-3 mb-3">
                   <label for="zip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="zip" name="zip" placeholder="" required>
-                  <div class="invalid-feedback">
+                  <input type="text" class="form-control" id="zip" name="zip" placeholder="Eg: 33003">
+                  @error('zip')
+                  <div class="text text-danger">
                     Zip code required.
-                  </div>
+                  </div>  
+                  @enderror
                 </div>
               </div>
               
@@ -129,6 +141,9 @@
               @php
                 $totalPrice += $cart->product->price * $cart->quantity;
               @endphp
+
+              <input type="hidden" name="cart_ids[]" value="{{ $cart->id }}">
+
                @endforeach
 
                 <tr>
@@ -143,8 +158,8 @@
             <span><b>Payment Options</b></span>
                 <hr>
               <button class="btn-add" type="submit">Cash On Delivery</button>
-              <button class="btn-add" type="submit">Khalti</button>
             </form>
+              <a class="btn-add">Khalti</a>
           </div>
         </div>
 
@@ -157,7 +172,7 @@
       /* Custom CSS */
       .card {
         border: none;
-        border-radius: 10px;
+        border-radius: 20px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       }
     
@@ -169,15 +184,5 @@
     
       .form-label {
         font-weight: bold;
-      }
-    
-      .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-      }
-    
-      .btn-primary:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
       }
   </style>
