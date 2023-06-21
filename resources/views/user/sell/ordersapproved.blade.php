@@ -18,13 +18,13 @@
   <div class="row">
     
     @include('layouts.sidebarseller')
-
+    
     <div class="col-md-10 content" >
       
         <div class="card" style="background: #f3f5fa">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h2 style="color: #283a5ae6;">Pending Order</h2>
+                    <h2 style="color: #283a5ae6;">Approved Order</h2>
                 </div>
     
                 <!-- Success Message -->
@@ -69,10 +69,10 @@
                               <td>{{$OD->total_price}}</td>
                               <td>{{$OD->payment_method}}</td>
                               <td>
-                                <p class="bg bg-secondary p-1">{{$OD->status}}</p>
+                                <p class="bg bg-info p-1">{{$OD->status}}</p>
                               </td>
                               <td>
-                              <a href="{{route('user.sell.orders.approve',$OD->id)}}" class="btn btn-success">Approve</a>
+                              <a href="{{route('user.sell.orders.complete',$OD->id)}}" class="btn btn-success">Completed</a>
                               <button id="btn-action-delete" class="btn btn-danger" data-product-id="{{ $OD->id }}">Cancel</button>
                               </td>
                           </tr>

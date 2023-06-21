@@ -72,14 +72,20 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::post('/user/sell/manageproducts/destroy',[SellController::class,'destroy'])->name('user.sell.manageproducts.destroy');
     // Sell.Orders
     Route::get('/user/sells/orders/',[SellController::class,'orders'])->name('user.sell.orders');
+    Route::get('/user/sells/ordersapproved',[SellController::class,'ordersapproved'])->name('user.sell.ordersapproved');
+    Route::get('/user/sells/ordersreturned',[SellController::class,'ordersreturned'])->name('user.sell.ordersreturned');
+    Route::get('/user/sells/orderscompleted',[SellController::class,'orderscompleted'])->name('user.sell.orderscompleted');
     Route::post('/user/sell/orders/destroy',[SellController::class,'ordersdestroy'])->name('user.sell.orders.destroy');
     Route::get('/user/sell/orders/{id}/approve',[SellController::class,'ordersapprove'])->name('user.sell.orders.approve');
+    Route::get('/user/sell/orders/{id}/return',[SellController::class,'ordersreturn'])->name('user.sell.orders.return');
+    Route::get('/user/sell/orders/{id}/complete',[SellController::class,'orderscomplete'])->name('user.sell.orders.complete');
     
 
 
     //Orders
     Route::get('/user/orders/',[OrderController::class,'index'])->name('user.orders.index');
     Route::post('/user/orders/store', [OrderController::class, 'store'])->name('user.orders.store');
+    Route::post('/user/orders/destroy',[OrderController::class,'ordersdestroy'])->name('user.orders.destroy');
 
     // Cart
     Route::get('/user/orders/cart',[CartController::class,'index'])->name('user.orders.cart');

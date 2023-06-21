@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,7 +15,7 @@ class OrderController extends Controller
     $buyerId = auth()->user()->id;
 
     // Retrieve orders for the specific buyer
-    $orders = Order::with('seller','orderDetails')
+    $orders = Order::with('seller')
         ->where('buyer_id', $buyerId)
         ->latest()->get();
 
@@ -64,66 +63,36 @@ class OrderController extends Controller
         $sellerId = $product->user_id;
         $buyerId = $cart->user_id;
 
-        $existingOrder = Order::where('buyer_id', $buyerId)
-        ->where('seller_id', $sellerId)
-        ->first();
-        
-        if(!$existingOrder)
-        {
-            // Create a new order
-            $order = new Order();
-            $order->buyer_id = $buyerId;
-            $order->seller_id = $sellerId;
-            $order->save();
+        $order = new Order();
+        $order->buyer_id = $buyerId;
+        $order->seller_id = $sellerId;
+        $order->product_id = $cart->product_id;
+        $order->quantity = $cart->quantity;
+        $order->total_price = $cart->quantity * $product->price;
+        $order->date = now();
+        $order->buyername = $name;
+        $order->buyeremail = $email;
+        $order->buyeraddress = $address;
+        $order->buyercontact = $contact;
+        $order->buyerzip = $zip;
+        $order->buyercountry = $country;
+        $order->buyerstate = $state;
+        $order->status = 'Pending';
+        $order->payment_method = 'Cash on Delivery';
+        $order->save();
 
-            $orderDetail = new OrderDetail();
-            $orderDetail->order_id = $order->id;
-            $orderDetail->product_id = $cart->product_id;
-            $orderDetail->quantity = $cart->quantity;
-            $orderDetail->total_price = $cart->quantity * $product->price;
-            $orderDetail->date = now();
-            $orderDetail->buyername = $name;
-            $orderDetail->buyeremail = $email;
-            $orderDetail->buyeraddress = $address;
-            $orderDetail->buyercontact = $contact;
-            $orderDetail->buyerzip = $zip;
-            $orderDetail->buyercountry = $country;
-            $orderDetail->buyerstate = $state;
-            $orderDetail->status = 'Pending';
-            $orderDetail->payment_method = 'Cash on Delivery';
-            $orderDetail->save();
-
-            $cart->delete();
-
-
-
-        }else
-        {
-            
-            $orderDetail = new OrderDetail();
-            $orderDetail->order_id = $existingOrder->id;
-            $orderDetail->product_id = $cart->product_id;
-            $orderDetail->quantity = $cart->quantity;
-            $orderDetail->total_price = $cart->quantity * $product->price;
-            $orderDetail->date = now();
-            $orderDetail->buyername = $name;
-            $orderDetail->buyeremail = $email;
-            $orderDetail->buyeraddress = $address;
-            $orderDetail->buyercontact = $contact;
-            $orderDetail->buyerzip = $zip;
-            $orderDetail->buyercountry = $country;
-            $orderDetail->buyerstate = $state;
-            $orderDetail->status = 'Pending';
-            $orderDetail->payment_method = 'Cash on Delivery';
-            $orderDetail->save();
-
-            $cart->delete();
-        }
-        
+        $cart->delete();
         
     }
 
     return redirect(route('user.orders.index'))->with('success','Order Placed Successful!');
 }
+
+ public function ordersdestroy(Request $request)
+    {
+        $orders= Order::find($request->dataid);
+        $orders->delete();
+        return redirect(route('user.orders.index'))->with('success','Order Deleted Successfully!');
+    }
 
 }

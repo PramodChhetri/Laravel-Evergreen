@@ -15,6 +15,19 @@ return new class extends Migration
             $table->id();
             $table->foreignId('buyer_id')->constrained('users');
             $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('product_id')->constrained();
+            $table->integer('quantity');
+            $table->decimal('total_price', 8, 2);
+            $table->date('date');
+            $table->enum('payment_method', ['Online', 'Cash on Delivery', 'Pending'])->default('Pending');
+            $table->string('buyeremail')->nullable();
+            $table->string('buyername')->nullable();
+            $table->string('buyercontact')->nullable();
+            $table->text('buyeraddress')->nullable();
+            $table->text('buyercountry')->nullable();
+            $table->text('buyerstate')->nullable();
+            $table->text('buyerzip')->nullable();
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

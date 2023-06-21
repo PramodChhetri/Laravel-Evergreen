@@ -149,19 +149,65 @@ class SellController extends Controller
     $sellerId = auth()->user()->id;
 
     // Retrieve orders for the specific buyer
-    $orders = Order::with('buyer','orderDetails')
+    $orders = Order::with('buyer')
         ->where('seller_id', $sellerId)
-        ->latest()->get();
+        ->where('status','Pending')
+        ->orderBy('status','desc')->get();
 
     // Pass the list of orders to the seller's dashboard view
     return view('user.sell.orders', compact('orders'));
     }
 
+    public function ordersapproved()
+    {
+        // Retrieve the authenticated buyer's ID
+    $sellerId = auth()->user()->id;
+
+    // Retrieve orders for the specific buyer
+    $orders = Order::with('buyer')
+        ->where('seller_id', $sellerId)
+        ->where('status','Approved')
+        ->orderBy('status','desc')->get();
+
+    // Pass the list of orders to the seller's dashboard view
+    return view('user.sell.ordersapproved', compact('orders'));
+    }
+
+    public function orderscompleted()
+    {
+        // Retrieve the authenticated buyer's ID
+    $sellerId = auth()->user()->id;
+
+    // Retrieve orders for the specific buyer
+    $orders = Order::with('buyer')
+        ->where('seller_id', $sellerId)
+        ->where('status','Completed')
+        ->orderBy('status','desc')->get();
+
+    // Pass the list of orders to the seller's dashboard view
+    return view('user.sell.orderscompleted', compact('orders'));
+    }
+
+    public function ordersreturned()
+    {
+        // Retrieve the authenticated buyer's ID
+    $sellerId = auth()->user()->id;
+
+    // Retrieve orders for the specific buyer
+    $orders = Order::with('buyer')
+        ->where('seller_id', $sellerId)
+        ->where('status','Returned')
+        ->orderBy('status','desc')->get();
+
+    // Pass the list of orders to the seller's dashboard view
+    return view('user.sell.ordersreturned', compact('orders'));
+    }
+
     public function ordersapprove($id)
     {
-        $orderDetail = OrderDetail::find($id);
-        $quantity = $orderDetail->quantity;
-        $productId = $orderDetail->product_id;
+        $order = Order::find($id);
+        $quantity = $order->quantity;
+        $productId = $order->product_id;
         $product = Product::find($productId);
         $stock = $product->stock;
         
@@ -171,16 +217,34 @@ class SellController extends Controller
             $product->update([
                 'stock' => $stock - $quantity
             ]);
-            $orderDetail->update([
+            $order->update([
                 'status' => 'Approved'
             ]);
         return redirect(route('user.sell.orders'))->with('success','Order Approved Successfully!');
         }
     }
 
+    public function orderscomplete($id)
+    {
+        $order = Order::find($id);
+        $order->update([
+            'status' => 'Completed'
+            ]);
+        return redirect(route('user.sell.ordersapproved'))->with('success','Order Complete Successfully!');
+    }
+
+    public function ordersreturn($id)
+    {
+        $order = Order::find($id);
+        $order->update([
+            'status' => 'Returned'
+            ]);
+        return redirect(route('user.sell.ordersapproved'))->with('success','Order Returnd');
+    }
+
     public function ordersdestroy(Request $request)
     {
-        $orders= OrderDetail::find($request->dataid);
+        $orders= Order::find($request->dataid);
         $orders->delete();
         return redirect(route('user.sell.orders'))->with('success','Order Deleted Successfully!');
     }

@@ -73,14 +73,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $order)
-                        @foreach ($order->orderDetails as $OD)
+                    @foreach($orders as $OD)
                         <tr>
                           <td><img height="50px"
                             src="{{ asset('images/products/'.$OD->product->photopath) }}"
                             alt=""></td>
                           <td>{{$OD->product->name}}</td>
-                          <td>{{ $order->seller->name }}</td>
+                          <td>{{$OD->seller->name }}</td>
                           <td>{{$OD->quantity}}</td>
                           <td>{{$OD->total_price}}</td>
                           <td>{{$OD->payment_method}}</td>
@@ -91,7 +90,6 @@
                           @endif
                         </td>
                       </tr>
-                        @endforeach
                     @endforeach
                 </tbody>
                 </table>
@@ -107,7 +105,7 @@
 <div id="deleteModal" class="modal fade">
 <div class="modal-dialog">
 <div class="modal-content bg-white p-4 rounded-lg">
-<form action="{{route('user.sell.orders.destroy')}}" method="POST">
+<form action="{{route('user.orders.destroy')}}" method="POST">
 @csrf
 <p class="modal-title text-2xl">Are you sure you want to Cancel your Order?</p>
 <input type="hidden" name="dataid" id="dataid" value="">
