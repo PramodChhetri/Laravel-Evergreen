@@ -15,23 +15,9 @@
 </section>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2 sidebar">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('user.sell.index') }}">Seller Center</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('user.sell.managestocks') }}">Manage Stocks</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.sell.manageproducts') }}">Manage Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('user.sell.orders') }}">Orders</a>
-      </li>
-        </ul>
-    </div>
+ 
+  @include('layouts.sidebarseller')
+  
     <div class="col-md-10 content" >
       <!-- Product Manage Content -->
       <div class="card" style="background: #f3f5fa">

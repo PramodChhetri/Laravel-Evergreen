@@ -10,16 +10,16 @@
           <a class="nav-link" href="{{ route('user.sell.manageproducts') }}">Manage Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.sell.orders') }}">Pending Orders</a>
+        <a class="nav-link" href="{{ route('user.sell.orders') }}"><i>Pending Orders</i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.sell.ordersapproved') }}">Approved Orders</a>
+        <a class="nav-link" href="{{ route('user.sell.ordersapproved') }}"><i>Approved Orders</i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.sell.orderscompleted') }}">Completed Orders</a>
+        <a class="nav-link" href="{{ route('user.sell.orderscompleted') }}"><i>Completed Orders</i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.sell.ordersreturned') }}">Returned Orders</a>
+        <a class="nav-link" href="{{ route('user.sell.ordersreturned') }}"><i>Returned Orders</i></a>
       </li>
       </ul>
   </div>
