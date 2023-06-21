@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CategoryController;
@@ -164,7 +165,11 @@ Route::middleware('auth')->group(function () {
     // Approval 
     Route::get('/approval', [ApprovalController::class, 'index'])->name('approval.index');
     Route::get('/approval/{id}/update',[ApprovalController::class,'updateuser'])->name('approval.update');
-    Route::post('/approval/destroy',[ApprovalControllerr::class,'destroy'])->name('approval.destroy');
+    Route::post('/approval/destroy',[ApprovalController::class,'destroy'])->name('approval.destroy');
+
+    // Orders
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders/destroy',[AdminOrderController::class,'destroy'])->name('orders.destroy');
 
 });                                                 
 

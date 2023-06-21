@@ -15,10 +15,11 @@
 </section>
 
 <div class="container-fluid">
- 
-  @include('layouts.sidebarseller')
-  
-    <div class="col-md-10 content" >
+  <div class="row">
+    
+    @include('layouts.sidebarseller')
+    
+    <div class="col-md-10 content">
       <!-- Product Manage Content -->
       <div class="card" style="background: #f3f5fa">
         <div class="card-body">

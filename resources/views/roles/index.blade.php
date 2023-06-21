@@ -26,7 +26,7 @@
                 <td>{{$role->id}}</td>
                 <td>{{$role->name}}</td>
                 <td> @forelse ($role->permissions as $rp)
-                    <span class="bg-green-600 text-white px-2 py-1 rounded">{{$rp->name}}</span>
+                    <span class="text-blue-900 px-1 py-1 rounded" ><b><u>{{$rp->name}}</u></b></span>
                     @empty
                     <span class="bg-red-400 text-white px-2 py-1 rounded">No Permissions</span>
                     @endforelse</td>

@@ -227,19 +227,40 @@ class SellController extends Controller
     public function orderscomplete($id)
     {
         $order = Order::find($id);
+        $product = Product::find($order->product_id);
+        $quantity = $order->quantity;
+        $productsales = $product->totalsells;
+
         $order->update([
             'status' => 'Completed'
             ]);
+
+        $product->update([
+            'totalsells' => $productsales + $quantity
+        ]);
+        
         return redirect(route('user.sell.ordersapproved'))->with('success','Order Complete Successfully!');
     }
 
     public function ordersreturn($id)
     {
         $order = Order::find($id);
+        $product = Product::find($order->product_id);
+        $quantity = $order->quantity;
+        $productsales = $product->totalsells;
+
         $order->update([
             'status' => 'Returned'
             ]);
-        return redirect(route('user.sell.ordersapproved'))->with('success','Order Returnd');
+
+        if($productsales >= $quantity){
+            $product->update([
+                'totalsells' => $productsales - $quantity
+            ]);
+        }
+        
+
+        return back()->with('success','Order Returnd');
     }
 
     public function ordersdestroy(Request $request)

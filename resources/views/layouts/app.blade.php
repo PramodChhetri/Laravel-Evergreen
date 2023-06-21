@@ -30,6 +30,7 @@
                     <a href="{{route('category.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Categories</a>
                     <a href="{{route('stock.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Stock</a>
                     <a href="{{route('products.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Products</a>
+                    <a href="{{route('orders.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Orders</a>
                     <a href="{{route('roles.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Roles</a>
                     <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Permissions</a>
                     <a href="/profile" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Profile</a>
