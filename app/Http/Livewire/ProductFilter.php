@@ -66,6 +66,6 @@ class ProductFilter extends Component
             $query->orderBy('price', $this->priceOrder);
         }
 
-        return $query->paginate(5);
+        return $query->paginate(8);
     }
 }

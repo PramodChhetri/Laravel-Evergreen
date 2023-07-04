@@ -16,6 +16,8 @@
 
 <div class="container-fluid">
   
+  <div class="row">
+
   @include('layouts.sidebarseller')
 
     <div class="col-md-10 content">

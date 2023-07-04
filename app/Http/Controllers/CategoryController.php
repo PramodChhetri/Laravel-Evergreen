@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+// import the Intervention Image Manager Class
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\Category;
-
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -23,7 +24,7 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:categories|max:255',
             'priority' => 'required|numeric',
-            'photopath' => 'required'
+            'photopath' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ],
         [
             'name.required' => 'Please Enter Category Name',
@@ -34,10 +35,16 @@ class CategoryController extends Controller
         if($request->hasFile('photopath')){
             $image = $request->file('photopath');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/categories');
-            $image->move($destinationPath,$name);
-            $data['photopath'] = $name;
+            Image::make($image)->resize(500, 500)->save('images/categories/'.$name);
+            $data['photopath'] = $name; 
         }
+        // if($request->hasFile('photopath')){
+        //     $image = $request->file('photopath');
+        //     $name = time().'.'.$image->getClientOriginalExtension();
+            // $destinationPath = public_path('/images/categories');
+            // $image->move($destinationPath,$name);
+            // $data['photopath'] = $name;
+        // }
 
         Category::create($data);
         return redirect(route('category.index'))->with('success','Category Created Successfully!');
@@ -61,8 +68,7 @@ class CategoryController extends Controller
         if($request->hasFile('photopath')){
             $image = $request->file('photopath');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/categories');
-            $image->move($destinationPath,$name);
+            Image::make($image)->resize(500, 500)->save('images/categories/'.$name);
             unlink('images/categories/'.$category->photopath);
             $data['photopath'] = $name;
         }

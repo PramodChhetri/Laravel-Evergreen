@@ -12,6 +12,7 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SellController;
 use App\Models\Cart;
@@ -87,6 +88,9 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user/orders/',[OrderController::class,'index'])->name('user.orders.index');
     Route::post('/user/orders/store', [OrderController::class, 'store'])->name('user.orders.store');
     Route::post('/user/orders/destroy',[OrderController::class,'ordersdestroy'])->name('user.orders.destroy');
+
+    //Feedback
+    Route::post('/user/feedbacks/store', [FeedbackController::class, 'store'])->name('user.feedbacks.store');
 
     // Cart
     Route::get('/user/orders/cart',[CartController::class,'index'])->name('user.orders.cart');

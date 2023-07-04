@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,10 @@ class FrontendController extends Controller
     public function productdetail($id)
     {
         $product = Product::find($id);
-        $relatedproducts = Product::where('category_id', '=', $product->category_id)->paginate(3);
-        return view('user.productdetail',compact('product','relatedproducts'));
+        $feedbacks = Feedback::where('product_id','=',$id)->latest()->paginate(4);
+        $relatedproducts = Product::where('category_id', '=', $product->category_id)->where('id', '!=', $product->id)->orderBy('totalsells', 'desc')->paginate(4);
+
+        return view('user.productdetail',compact('product','relatedproducts','feedbacks'));
     }
 
 

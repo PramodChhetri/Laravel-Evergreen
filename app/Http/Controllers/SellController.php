@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\approval;
 use App\Models\Category;
 use App\Models\Order;
@@ -73,6 +74,7 @@ class SellController extends Controller
         if($request->hasFile('photopath')){
             $image = $request->file('photopath');
             $name = time().'.'.$image->getClientOriginalExtension();
+            // Image::make($image)->resize(300, 300)->save('images/products/'.$name);
             $destinationPath = public_path('/images/products');
             $image->move($destinationPath,$name);
             $data['photopath'] = $name;
@@ -106,6 +108,7 @@ class SellController extends Controller
         if($request->hasFile('photopath')){
             $image = $request->file('photopath');
             $name = time().'.'.$image->getClientOriginalExtension();
+            // Image::make($image)->resize(300, 300)->save('images/products/'.$name);
             $destinationPath = public_path('/images/products');
             $image->move($destinationPath,$name);
             unlink('images/products/'.$product->photopath);

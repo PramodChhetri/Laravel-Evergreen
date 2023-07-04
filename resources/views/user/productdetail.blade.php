@@ -77,20 +77,19 @@
     </div>
   </section><!-- End Portfolio Details Section -->
 
-<div class="container-fluid">
+<div class="container-fluid" style=" background:#f3f5fa;">
   <ul class="nav nav-tabs beautiful-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
     </li>
-    <li class="nav-item" role="presentation">
+    <li class="nav-item" role="presentation" >
       <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Feedbacks</a>
     </li>
   </ul>
   
   <div class="tab-content beautiful-tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <section id="portfolio" class="portfolio">
-        <div class="container">
+      <div class="related-portfolio">
             <div class="row portfolio-container" >  {{-- data-aos="fade-up" --}}
        
                 @foreach ($relatedproducts as $product)
@@ -119,30 +118,42 @@
           
               </div>
         </div>
-    
-      </section>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-        <div class="row" style="margin: 50px; background:#f3f5fa;">
-            <div class="col-lg-12" data-aos="fade-up">
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style=" background:#f3f5fa;">
+    
+      <div style="padding: 5px; ">
+        <form action="{{route('user.feedbacks.store')}}" method="POST">
+          @csrf
+          @error('feedback')
+                <Span class="text text-danger">Please Enter Something!</Span>
+          @enderror
+          <textarea name="feedback" id="default" placeholder="Give Feedback Here"></textarea>
+          <input type="hidden" name="product_id" value="{{$product->id}}"> 
+          <input type="submit" class="btn-add" style="margin-top: 10px;">
+        </form>
+      </div>
+        <div class="row" style=" margin-top:20px;">
+            <div class="col-lg-12">
+             <div>
+              <h5 style="border-bottom: 2px solid #333;">Latest Feedbacks</h5>
+              @foreach ($feedbacks as $fb)
               <div>
-                <h5>Ceo &amp; Founder</h5>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
+                  <span style="padding-top: 10px;">{{$fb->user->name}}</span>
+                  <div style="border-bottom: 1px solid #333; padding-bottom: 3px; font-style: italic; display: flex; align-items: center;">
+                      <sup><i class="bx bxs-quote-alt-left quote-icon-left"></i></sup>
+                      <p>{!! html_entity_decode($fb->feedback) !!}</p>
+                      <sup><i class="bx bxs-quote-alt-right quote-icon-right"></i></sup>
+                  </div>
               </div>
+          @endforeach
+          
+            </div>
             </div> 
         </div>
 
-      
-      
     </div>
   </div>
 </div>
-
 
 <script>
   var tab = new bootstrap.Tab(document.getElementById('myTab'))
