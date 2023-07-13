@@ -35,10 +35,6 @@
         </ul>
         {{-- Mobile Toggle --}}
         <i class="bi bi-list mobile-nav-toggle"></i>
-        {{-- Cart Icon --}}
-        <i class='bx bx-cart' id="cart-icon"></i>
-      </nav><!-- .navbar -->
-
 
 
     <livewire:cart-content />

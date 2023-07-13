@@ -13,7 +13,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->paginate(8);
+        $products = Product::orderBy('totalsells')->paginate(8);
         return view('user.index',compact('products'));
     }
 
@@ -25,11 +25,12 @@ class FrontendController extends Controller
 
     public function productdetail($id)
     {
+        $productid = $id;
         $product = Product::find($id);
-        $feedbacks = Feedback::where('product_id','=',$id)->latest()->paginate(4);
+        $feedbacks = Feedback::where('product_id', '=', $id)->latest()->get();
         $relatedproducts = Product::where('category_id', '=', $product->category_id)->where('id', '!=', $product->id)->orderBy('totalsells', 'desc')->paginate(4);
 
-        return view('user.productdetail',compact('product','relatedproducts','feedbacks'));
+        return view('user.productdetail',compact('product','relatedproducts','feedbacks','productid'));
     }
 
 

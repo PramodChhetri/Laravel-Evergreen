@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
+    public function index()
+    {
+    $feedbacks = Feedback::all();
+    return view('feedbacks.index', compact('feedbacks'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $feedback= Feedback::find($request->dataid);
+        $feedback->delete();
+        return redirect(route('feedbacks.index'))->with('success','Feedback Deleted Successfully!');
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([

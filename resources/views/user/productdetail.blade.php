@@ -128,7 +128,7 @@
                 <Span class="text text-danger">Please Enter Something!</Span>
           @enderror
           <textarea name="feedback" id="default" placeholder="Give Feedback Here"></textarea>
-          <input type="hidden" name="product_id" value="{{$product->id}}"> 
+          <input type="hidden" name="product_id" value="{{$productid}}"> 
           <input type="submit" class="btn-add" style="margin-top: 10px;">
         </form>
       </div>
@@ -146,6 +146,10 @@
                   </div>
               </div>
           @endforeach
+
+          @if ($feedbacks == NULL)
+          <span style="padding-top: 10px;">No Feedbacks Yet!</span>
+          @endif
           
             </div>
             </div> 

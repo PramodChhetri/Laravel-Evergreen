@@ -12,10 +12,12 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SellController;
 use App\Models\Cart;
+use App\Models\Feedback;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -43,10 +45,9 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/dashboard', function () {
-    $users = User::all();
-    return view('dashboard',compact('users'));
-})->middleware(['auth', 'verified','role:admin'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified', 'role:admin'])
+    ->name('dashboard');
 
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/user', [FrontendController::class, 'index'])->name('user.index');
@@ -174,6 +175,10 @@ Route::middleware('auth')->group(function () {
     // Orders
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
     Route::post('/orders/destroy',[AdminOrderController::class,'destroy'])->name('orders.destroy');
+
+    // Feedbacks
+    Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
+    Route::post('/feedbacks/destroy',[FeedbackController::class,'destroy'])->name('feedbacks.destroy');
 
 });                                                 
 
