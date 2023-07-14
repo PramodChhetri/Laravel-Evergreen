@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
         <script src="{{asset('datatable/datatables.js')}}"></script>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        @livewireStyles
         <style>
             .sidebar {
                 width: 260px;
@@ -50,6 +51,7 @@
                     <a href="{{route('orders.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Orders</a>
                     <a href="{{route('roles.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Roles</a>
                     <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Permissions</a>
+                    <a href="{{route('feedbacks.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Feedbacks</a>
                     <a href="{{route('profile.edit')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Profile</a>
                     </div>
             </div>
@@ -138,6 +140,9 @@
         });
     </script>
     
+
     </body>
     
+
+    @livewireScripts
     </html>

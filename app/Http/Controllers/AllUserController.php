@@ -108,4 +108,25 @@ class AllUserController extends Controller
         $user->delete();
         return redirect(route('allusers.index'))->with('success','User Deleted Successfully!');
     }
+
+    // Profile picture update
+    public function updatePP(Request $request, $id)
+    {
+        $user = User::find($id);
+        $data = $request->validate([
+            'image' => 'required',
+        ]);
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/users');
+            $image->move($destinationPath,$name);
+            $data['image'] = $name;
+        }
+
+        $user->update($data);
+        return redirect(route('profile.edit'))->with('success','Profile Picture Updated Successfully');
+    }
+
 }

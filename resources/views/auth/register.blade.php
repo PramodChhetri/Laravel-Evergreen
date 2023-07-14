@@ -9,6 +9,10 @@
       margin-right: -50px;
     }
 
+    .form-control {
+      background-color: #e8f0fe;
+    }
+
     @media (max-width: 991.98px) {
       .cascading-right {
         margin-right: 0;
@@ -21,13 +25,18 @@
     <div class="row g-0 align-items-center">
       <div class="col-lg-6 mb-5 mb-lg-0">
         <div class="card cascading-right" style="
-            background: hsla(0, 0%, 100%, 0.55);
-            backdrop-filter: blur(30px);
+            background-color:#fff;
             ">
-          <div class="card-body p-5 shadow-5 text-center">
-            <h2 class="fw-bold mb-5">Sign up now</h2>
+          <div class="card-body p-5 shadow-5>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
+
+                <div class="d-flex align-items-center mb-3 pb-1">
+                  <a href="/"><span class="h1 fw-bold mb-0 text-dark">Evergreen</span></a>
+                </div>
+
+                <h5 class="fw-normal mb-3 pb-3 text-dark" style="letter-spacing: 1px; ">Signup for new account</h5>
+
 
               <!-- Name Input  -->
               <div class="form-outline mb-4">
@@ -66,7 +75,7 @@
               @enderror
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" class="btn btn-dark btn-block mb-4">
                 Sign up
               </button>
 
@@ -80,7 +89,7 @@
       </div>
 
       <div class="col-lg-6 mb-5 mb-lg-0">
-        <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+        <img src="{{ asset('images/img/signup.jpg') }}" class="w-100 rounded-4 shadow-4"
           alt="" />
       </div>
     </div>

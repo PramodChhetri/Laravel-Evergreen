@@ -7,18 +7,18 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Portfolio Details</h2>
+        <h2>Product Details</h2>
         <ol>
           <li><a href="index.html">Home</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
-          <li>Portfolio Details</li>
+          <li>Product Details</li>
         </ol>
       </div>
 
     </div>
   </section><!-- End Breadcrumbs -->
 
-  <!-- ======= Portfolio Details Section ======= -->
+  <!-- ======= Product Details Section ======= -->
   <section id="portfolio-details" class="portfolio-details">
     <div class="container" data-aos="fade-up">
 
@@ -139,7 +139,7 @@
               @foreach ($feedbacks as $fb)
               <div>
                   <span style="padding-top: 10px;">{{$fb->user->name}}</span>
-                  <div style="border-bottom: 1px solid #333; padding-bottom: 3px; font-style: italic; display: flex; align-items: center;">
+                  <div style="border-bottom: 1px solid #283a5ae6; padding-bottom: 3px; display: flex; align-items: center;">
                       <sup><i class="bx bxs-quote-alt-left quote-icon-left"></i></sup>
                       <p>{!! html_entity_decode($fb->feedback) !!}</p>
                       <sup><i class="bx bxs-quote-alt-right quote-icon-right"></i></sup>
