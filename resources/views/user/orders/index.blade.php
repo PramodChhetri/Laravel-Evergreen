@@ -23,13 +23,13 @@
     <div class="row">
     <div class="col-md-2 sidebar">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li>
           <a class="nav-link" href="{{route('user.orders.index')}}">Current Orders</a>
         </li>
-        <li class="nav-item">
+        <li >
             <a class="nav-link" href="#">Order History</a>
         </li>
-        <li class="nav-item">
+        <li >
             <a class="nav-link" href="{{route('user.orders.cart')}}">Cart</a>
         </li>
         </ul>

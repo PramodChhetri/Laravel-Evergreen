@@ -17,6 +17,12 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  {{-- Toast Cdn  --}}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
   {{-- {{asset('')}} --}}
   <!-- Vendor CSS Files -->
   <link href="{{asset('frontend/assets/vendor/aos/aos.css')}}" rel="stylesheet">
@@ -172,6 +178,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+
+  @include('layouts.usertoastr')
 
 </body>
 

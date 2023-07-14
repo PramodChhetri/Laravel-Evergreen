@@ -49,11 +49,11 @@ class CartController extends Controller
         // check already exists
         $check = Cart::where('product_id',$data['product_id'])->where('user_id',$data['user_id'])->count();
         if($check > 0){
-            return back()->with('success','Item already added to Cart');
+            return back()->with('info','Item already added to Cart!');
         }
 
         Cart::create($data);
-        return back()->with('success','Item added to Cart');
+        return back()->with('success','Item added to Cart.');
 
     }
 
