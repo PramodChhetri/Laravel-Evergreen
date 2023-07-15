@@ -27,7 +27,7 @@
         <div class="card cascading-right" style="
             background-color:#fff;
             ">
-          <div class="card-body p-5 shadow-5>
+          <div class="card-body p-5 shadow-5">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
