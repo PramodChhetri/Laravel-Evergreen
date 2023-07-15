@@ -12,6 +12,7 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
@@ -40,6 +41,7 @@ Route::get('/', function () {
     return view('home',compact('products'));
 });
 
+Route::post('/',[ContactController::class,'send'])->name('send.email');
 
 Route::get('/about', function () {
     return view('about');
@@ -182,6 +184,10 @@ Route::middleware('auth')->group(function () {
     // Feedbacks
     Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
     Route::post('/feedbacks/destroy',[FeedbackController::class,'destroy'])->name('feedbacks.destroy');
+
+    // Feedbacks
+    Route::get('/messages', [ContactController::class, 'index'])->name('messages.index');
+    Route::post('/messages/destroy',[ContactController::class,'destroy'])->name('messages.destroy');
 
 });                                                 
 

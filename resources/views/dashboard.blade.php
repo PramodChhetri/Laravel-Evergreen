@@ -21,7 +21,7 @@
 
         <a href="{{route('products.index')}}">
             <div class="px-4 py-8 rounded-lg bg-green-600 text-white flex justify-between">
-                <p class="font-bold text-lg">Products</p>
+                <p class="font-bold text-lg">Total Products</p>
                 <p class="font-bold text-5xl">{{ count($products) }}</p>
             </div>
         </a>
