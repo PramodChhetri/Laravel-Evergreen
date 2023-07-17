@@ -1,11 +1,11 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top header-inner-pages">
-    <div class="container d-flex align-items-center">
+    <div class="container-lg d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="/">Evergreen</a></h1>
+      <h1 class="logo me-auto"><a href="/user">Evergreen</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="/" class="logo me-auto"><img src="{{ asset('frontend/assets/img/logo.png') }}" alt="" class="img-fluid"></a>
+      {{-- <a href="/" class="logo me-auto"><img src="{{ asset('frontend/assets/img/logo.png') }}" alt="" class="img-fluid"></a> --}}
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -19,8 +19,9 @@
             </ul>
           </li>
           <li><a href="{{route('user.products')}}">Products</a></li>
-          <li><a href="{{route('user.sell.index')}}">Sell</a></li>
+          <li><a href="{{route('user.sell.index')}}">Seller Center</a></li>
           <li><a href="{{route('user.orders.index')}}">Orders</a></li>
+          <li><a href="#">Contact Us</a></li>
           <li class="dropdown"><a href="#"><span>{{Auth::user()->name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{route('profile.edit')}}">

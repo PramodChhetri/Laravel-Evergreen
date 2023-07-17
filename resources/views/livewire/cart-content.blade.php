@@ -45,7 +45,7 @@
           <div class="total-price">Rs. {{$sum}}</div>
       </div>
       {{-- Buy Button --}}
-      <button class="btn-buy">Buy Now</button>
+      <a href="{{route('user.checkout')}}"><button class="btn-buy">Buy Now</button></a>
 
       {{-- Cart Close --}}
       <i class='bx bx-x' id="close-cart"></i>

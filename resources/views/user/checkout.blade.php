@@ -26,9 +26,9 @@
               <div class="row">
                 <div class="col-md-12 mb-3">
                   <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Eg: Axel Blade" value="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Eg: Axel Blade" required>
                   @error('name')
-                  <div class="text text-danger">
+                  <div class="message-error">
                     Valid first name is required.
                   </div> 
                   @enderror
@@ -39,13 +39,10 @@
               <div class="mb-3">
                 <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
-                  </div>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
                 </div>
                 @error('email')
-                  <div class="text text-danger">
+                  <div class="message-error">
                   Please enter a valid email address.
                   </div>
                 @enderror
@@ -54,9 +51,9 @@
               
               <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St">
+                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
                 @error('address')
-                <div class="text text-danger">
+                <div class="message-error">
                   Please enter your address.
                 </div>
                 @enderror
@@ -64,9 +61,9 @@
               
               <div class="mb-3">
                 <label for="contact" class="form-label">Contact Number</span></label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder="+97798xxxxxxxx or +977xxxxxx">
+                <input type="text" class="form-control" id="contact" name="contact" placeholder="+97798xxxxxxxx or +977xxxxxx" required>
                 @error('contact')
-                <div class="text text-danger">
+                <div class="message-error">
                   Please select a valid Number.
                 </div>
                 @enderror
@@ -75,9 +72,9 @@
               <div class="row">
                 <div class="col-md-5 mb-3">
                   <label for="country" class="form-label">Country</label>
-                  <input type="text" class="form-control" id="country" name="country" placeholder="Eg: Nepal">
+                  <input type="text" class="form-control" id="country" name="country" placeholder="Eg: Nepal" required>
                   @error('country')
-                  <div class="text text-danger">
+                  <div class="message-error">
                     Please select a valid country.
                   </div>
                   @enderror
@@ -85,9 +82,9 @@
                 
                 <div class="col-md-4 mb-3">
                   <label for="state" class="form-label">State</label>
-                  <input type="text" class="form-control" id="state" name="state" placeholder="Eg: Gandaki">
+                  <input type="text" class="form-control" id="state" name="state" placeholder="Eg: Gandaki" required>
                   @error('state')
-                  <div class="text text-danger">
+                  <div class="message-error">
                     Please provide a valid state.
                   </div>
                   @enderror
@@ -95,9 +92,9 @@
                 
                 <div class="col-md-3 mb-3">
                   <label for="zip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="zip" name="zip" placeholder="Eg: 33003">
+                  <input type="text" class="form-control" id="zip" name="zip" placeholder="Eg: 33003" required>
                   @error('zip')
-                  <div class="text text-danger">
+                  <div class="message-error">
                     Zip code required.
                   </div>  
                   @enderror
@@ -154,7 +151,7 @@
                 <hr>
               <button class="btn-add" type="submit">Cash On Delivery</button>
             </form>
-              <a class="btn-add">Khalti</a>
+              <a class="btn-add">Pay with Khalti</a>
           </div>
         </div>
 
@@ -162,6 +159,7 @@
       </div>
     </div>
   </section>
+
   
   <style>
       /* Custom CSS */
@@ -180,4 +178,22 @@
       .form-label {
         font-weight: bold;
       }
+
+      .btn-khalti {
+    background-color: #3F51B5;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    display: inline-block;
+  }
+
+  .btn-khalti:hover {
+    background-color: #303F9F;
+  }
+
   </style>

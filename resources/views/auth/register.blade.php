@@ -44,7 +44,7 @@
                 <input type="text" id="form3Example2" class="form-control" name="name" value="{{old('name')}}" required autofocus autocomplete="name"/>
               </div>
               @error('name')
-                <p class="text-danger">{{$message}}</p>
+                <p class="message-error">{{$message}}</p>
               @enderror
 
               <!-- Email input -->
@@ -53,7 +53,7 @@
                 <input type="email" id="form3Example3" class="form-control" name="email" value="{{old('email')}}" required autocomplete="username" />
               </div>
               @error('email')
-                <p class="text-danger">{{$message}}</p>
+                <p class="message-error">{{$message}}</p>
               @enderror
 
               <!-- Password input -->
@@ -62,7 +62,7 @@
                 <input type="password" id="form3Example4" class="form-control" name="password" required autocomplete="new-password"/>
               </div>
               @error('password')
-                <p class="text-danger">{{$message}}</p>
+                <p class="message-error">{{$message}}</p>
               @enderror
 
               <!-- RePassword input -->
@@ -71,7 +71,7 @@
                 <input type="password" id="form3Example5" class="form-control" name="password_confirmation" required autocomplete="new-password" />
               </div>
               @error('password_confirmation')
-                <p class="text-danger">{{$message}}</p>
+                <p class="message-error">{{$message}}</p>
               @enderror
 
               <!-- Submit button -->

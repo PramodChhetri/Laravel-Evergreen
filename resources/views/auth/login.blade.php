@@ -24,10 +24,10 @@
   
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example17">Email address</label>
-                        <input type="email" id="form2Example17" name="email" class="form-control form-control-lg" />
+                        <input type="email" id="form2Example17" name="email" class="form-control form-control-lg" required/>
                     </div>
                     @error('email')
-                      <p class="text-danger">{{$message}}</p>
+                      <p class="message-error">{{$message}}</p>
                     @enderror
   
                     <div class="form-outline mb-4">
@@ -35,7 +35,7 @@
                         <input type="password" id="form2Example27" name="password" required autocomplete="current-password" class="form-control form-control-lg" />
                     </div>
                     @error('password')
-                      <p class="text-dangerr">{{$message}}</p>
+                      <p class="message-error">{{$message}}</p>
                     @enderror
 
                     <div class="form-check">

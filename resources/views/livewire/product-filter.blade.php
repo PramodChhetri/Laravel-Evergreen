@@ -1,11 +1,9 @@
 <div class="container-fluid">
-    <div class="row">
-    <div class="col-md-3 sidebar">
-        <div style="text-align: center; margin: 10px;">
-            <h4 style="color: #37517e; ">Filter Products</h4>
-        </div>
-         
-         <form wire:submit.prevent="updated">
+  <div class="row">
+      <div class="col-md-3 sidebar sidebar-container">
+
+          <form wire:submit.prevent="updated">
+            <label class="form-label mt-2">Search Product:</label>
           <div class="search-bar">
             <input wire:model="name" style="width: 100%; padding: 6px 12px; outline: none; border: 2px solid #ddd; border-radius: 4px;"
             type="text" placeholder="Search Here" wire:model="search">
@@ -84,9 +82,10 @@
             </div>
             </div>
 
-         </form>
-</div>
-<div class="col-md-9 content">
+          </form>
+        </div>
+
+        <div id="main-content" class="col-md-9 ">
 
 
  <!-- ======= Portfolio Section ======= -->
@@ -124,10 +123,31 @@
   
           <style>
             svg{
-              width: 20px;
+              width: 25px;
             }
+              
           </style>   
     </div>
+
+    <script>
+      // Pure JavaScript
+      // const sidebarContainer = document.querySelector('.sidebar-container');
+      //   const sidebarToggle = document.getElementById('sidebar-toggle');
+
+      //   sidebarToggle.addEventListener('click', function() {
+      //       sidebarContainer.classList.toggle('show');
+      //       mainContent.classList.toggle('col-md-12');
+      //   });
+
+        // jQuery
+        $(document).ready(function() {
+    $('#sidebar-toggle').click(function() {
+      $('.sidebar-container').toggleClass('hide');
+      $('#main-content').toggleClass('col-md-9 col-md-12');
+    });
+  });
+
+    </script>
 
   </section>
 </div>

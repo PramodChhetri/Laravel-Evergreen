@@ -83,7 +83,7 @@
   </ul>
   
   <div class="tab-content beautiful-tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="related-portfolio">
             <div class="row portfolio-container" >  {{-- data-aos="fade-up" --}}
        
@@ -114,7 +114,7 @@
               </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style=" background:#f3f5fa;">
+    <div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab" style=" background:#f3f5fa;">
     
       <div style="padding: 5px; ">
         <form action="{{route('user.feedbacks.store')}}" method="POST">
@@ -122,7 +122,7 @@
           @error('feedback')
                 <Span class="text text-danger">Please Enter Something!</Span>
           @enderror
-          <textarea name="feedback" id="default" placeholder="Give Feedback Here"></textarea>
+          <textarea name="feedback" id="default" placeholder="Give Feedback Here" ></textarea>
           <input type="hidden" name="product_id" value="{{$productid}}"> 
           <input type="submit" class="btn-add" style="margin-top: 10px;">
         </form>

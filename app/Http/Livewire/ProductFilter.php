@@ -62,7 +62,7 @@ class ProductFilter extends Component
             $query = $query->where('price', '<=', $this->maxprice);
         }
 
-        if($this->priceOrder){
+        if ($this->priceOrder) {
             $query->orderBy('price', $this->priceOrder);
         }
 

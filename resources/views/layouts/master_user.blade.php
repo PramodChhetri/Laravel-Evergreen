@@ -65,7 +65,7 @@
           <h1>Start You Our Business From Home</h1>
           <h2>We provide platform for local businesses to sell their products</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            <a href="{{route('user.sell.index')}}" class="btn-get-started scrollto">Get Started</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
