@@ -1,6 +1,13 @@
 @extends('layouts.master_innerpage')
 
 @section('content')
+
+{{-- ajax script --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+
 <section id="breadcrumbs" class="breadcrumbs">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
@@ -151,7 +158,7 @@
                 <hr>
               <button class="btn-add" type="submit">Cash On Delivery</button>
             </form>
-              <a class="btn-add">Pay with Khalti</a>
+            <button id="payment-button" class="btn-khalti">Pay with Khalti</button>
           </div>
         </div>
 
@@ -180,7 +187,7 @@
       }
 
       .btn-khalti {
-    background-color: #3F51B5;
+    background-color: #5E338D;
     color: #FFFFFF;
     padding: 10px 20px;
     border: none;
@@ -193,7 +200,71 @@
   }
 
   .btn-khalti:hover {
-    background-color: #303F9F;
+    background-color: #FF2D79;
+    color: #fff;
   }
 
   </style>
+
+<script>
+  var config = {
+  // replace the publicKey with yours
+  publicKey: "test_public_key_b0d6db159004497c9244add1125f253c",
+  productIdentity: "1234567890",
+  productName: "55",
+  productUrl: "http://127.0.0.1:8000/user/7/productdetail",
+  paymentPreference: [
+    "KHALTI",
+    "EBANKING",
+    "MOBILE_BANKING",
+    "CONNECT_IPS",
+    "SCT"
+  ],
+  eventHandler: {
+    onSuccess: function(payload) {
+      // hit merchant API for initiating verification
+      console.log(payload);
+      if (payload.idx) {
+        $.ajaxSetup({
+          headers: {
+            "X-CSRF-TOKEN": '{{csrf_token()}}'
+          }
+        });
+
+        $.ajax({
+          method: "post",
+          url: "{{route('ajax.khalti.verify_order')}}",
+          data: payload,
+          success: function(response) {
+            if (response.success == 1) {
+              window.location = response.redirect;
+            } else {
+              checkout.hide();
+            }
+          },
+          error: function(data) {
+            console.log("Error:", data);
+          }
+        });
+      }
+    },
+    onError: function(error) {
+      console.log(error);
+    },
+    onClose: function() {
+      console.log("Widget is closing");
+    }
+  }
+};
+
+var checkout = new KhaltiCheckout(config);
+var btn = document.getElementById("payment-button");
+btn.onclick = function() {
+  // minimum transaction amount must be 10, i.e., 1000 in paisa.
+  checkout.show({ amount: 1000 });
+};
+
+</script>
+
+
+@endsection

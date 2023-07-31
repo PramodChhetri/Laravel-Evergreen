@@ -11,6 +11,9 @@
 
   @livewireStyles
 
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+
+
   <!-- Favicons -->
   <link href="{{asset('frontend/assets/img/favicon.png')}}" rel="icon">
   <link href="{{asset('frontend/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">

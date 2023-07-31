@@ -24,7 +24,7 @@
           <li><a href="#">Contact Us</a></li>
           <li class="dropdown"><a href="#"><span>{{Auth::user()->name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{{route('profile.edit')}}">
+              <li><a href="{{route('user.profile.index')}}">
                <span>Profile</span></a></li>
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
