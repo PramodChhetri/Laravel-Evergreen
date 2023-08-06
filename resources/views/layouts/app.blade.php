@@ -32,7 +32,74 @@
             .content {
                 transition: margin-left 0.3s;
             }
+
+        .notification-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 4px;
+            font-size: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Style the notification sidebar */
+        .notification-sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px; /* Initially hidden on the right */
+            width: 400px; /* Increased width to 320px */
+            z-index: 100;
+            padding: 20px;
+            border: 2px solid #e2e8f0; /* Add a beautiful border */
+            border-radius: 4px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+            transition: right 0.3s ease-in-out;
+        }
+
+        .notification-sidebar h1 {
+            color: #1f2937;
+            border-bottom: 2px solid #1f2937;
+        }
+
+        .notification-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .notification-sidebar li {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px; /* Rounded corners */
+            border: 1px solid #ccc;
+        }
+
+        .notification-sidebar li:hover {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e1e1e1;
+            border: 1px solid #a1a1a1;
+        }
+        .notification-sidebar li:last-child {
+            /* border-bottom: none; */
+        }
+
+        /* Animate the notification sidebar slide-in effect */
+        .notification-sidebar:not(.hidden) {
+            right: 0;
+        }
           </style>
+          
           
     </head>
     
@@ -76,7 +143,17 @@
                                 <span class="font-bold text-2xl text-green-700 hover:bg-gray-400">EVERGREEN NEPAL</span>
                             </a>
                         </div>
+                          
                         <div class="flex items-center">
+                            
+                            <div class="notification-container mr-8">
+                                <div>
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                  </svg>   
+                                </div>
+                                <div class="notification-badge"><b>44</b></div> <!-- Replace 42 with the actual number you want to display -->
+                              </div>
                             <!-- User Image -->
                             <img class="w-8 h-8 rounded-full" src="{{asset('images/users/'.Auth::user()->image)}}" alt="User Image">
 
@@ -118,6 +195,50 @@
                     @yield('content')
                 </div>
             </div>
+
+            <!-- Notification Sidebar -->
+        <div id="notificationSidebar" class="notification-sidebar min-h-screen bg-white shadow-lg flex flex-col  py-24 hidden">
+            <!-- Add content for the notification sidebar here -->
+            <!-- For example, you can show the list of notifications -->
+            <h1 class="text-center text-grey-600 text-xl font-bold">Notifications</h1>
+            <div class="relative">
+                <!-- Your content goes here -->
+                <span class="float-right"><u>See all</u></span>
+              </div>
+            <ul class="mt-4">
+                <li class="px-4 py-2">
+                    <div>
+                        <span>11:59 PM</span>
+                        <p> Notification 1</p>
+                    </div>
+                </li>
+                <li class="px-4 py-2">
+                    <div>
+                        <span>11:59 PM</span>
+                        <p> Notification 1</p>
+                    </div>
+                </li>
+                <li class="px-4 py-2">
+                    <div>
+                        <span>11:59 PM</span>
+                        <p> Notification 1</p>
+                    </div>
+                </li>
+                <li class="px-4 py-2">
+                    <div>
+                        <span>11:59 PM</span>
+                        <p> Notification 1</p>
+                    </div>
+                </li>
+                <li class="px-4 py-2">
+                    <div>
+                        <span>11:59 PM</span>
+                        <p> Notification 1</p>
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
         </div>
     
         <script>
@@ -129,6 +250,21 @@
             sidebarToggle.addEventListener('click', () => {
                 sidebar.classList.toggle('hidden');
                 content.classList.toggle('ml-0');
+            });
+    
+            // JavaScript to toggle notification sidebar visibility
+            const notificationToggle = document.querySelector('.notification-container');
+            const notificationSidebar = document.getElementById('notificationSidebar');
+    
+            notificationToggle.addEventListener('click', () => {
+                notificationSidebar.classList.toggle('hidden');
+            });
+    
+            // Close notification sidebar when clicked outside of it
+            window.addEventListener('click', (event) => {
+                if (!notificationToggle.contains(event.target) && !notificationSidebar.contains(event.target)) {
+                    notificationSidebar.classList.add('hidden');
+                }
             });
         </script>
     
