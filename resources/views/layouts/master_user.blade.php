@@ -8,6 +8,9 @@
   <title>Evergreen-Nepal</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <!-- Add the CSRF token in your main layout or the head section of the cart view -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 @livewireStyles
   
@@ -41,6 +44,8 @@
   <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
   <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
   <script src="{{asset('datatable/datatables.js')}}"></script>
+
+  
 
 
   <!-- =======================================================

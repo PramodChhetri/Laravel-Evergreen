@@ -237,7 +237,7 @@
           data: payload,
           success: function(response) {
             if (response.success == 1) {
-              window.location = response.redirect;
+              window.location.href = " {{ route('user.orders.index')}}";
             } else {
               checkout.hide();
             }

@@ -102,7 +102,7 @@
 
 
 
-<div id="deleteModal" class="modal fade">
+<div id="deleteModal" class="modal">
 <div class="modal-dialog">
 <div class="modal-content bg-white p-4 rounded-lg">
 <form action="{{route('user.orders.destroy')}}" method="POST">

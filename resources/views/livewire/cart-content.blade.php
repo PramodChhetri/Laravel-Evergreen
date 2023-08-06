@@ -4,6 +4,11 @@
   <span class='badge badge-warning' id='lblCartCount'> {{$cartcount}} </span>
 </div>
 
+<div id="notification-icon">
+  <i class='bx bx-bell'></i>
+  <span class='badge badge-warning' id='lblCartCount'> 1 </span>
+</div>
+
 </nav><!-- .navbar -->
 
 {{-- Cart --}}

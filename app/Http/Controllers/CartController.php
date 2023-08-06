@@ -14,17 +14,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        if(!auth()->user())
-        {
+        if (!auth()->user()) {
             $itemsincart = 0;
-        }
-        else
-        {
-            $itemsincart = Cart::where('user_id',auth()->user()->id)->count();
+        } else {
+            $itemsincart = Cart::where('user_id', auth()->user()->id)->count();
         }
         $categories = Category::orderBy('priority')->get();
-        $carts = Cart::where('user_id',auth()->user()->id)->get();
-        return view('user.orders.cart',compact('carts','categories','itemsincart'));
+        $carts = Cart::where('user_id', auth()->user()->id)->get();
+        return view('user.orders.cart', compact('carts', 'categories', 'itemsincart'));
     }
 
     /**
@@ -44,17 +41,20 @@ class CartController extends Controller
             'quantity' => 'required',
             'product_id' => 'required'
         ]);
+
         $data['user_id'] = auth()->user()->id;
+        if ($data['quantity'] <= 0) {
+            return back()->with('error', 'Invalid Quantity!');
+        }
 
         // check already exists
-        $check = Cart::where('product_id',$data['product_id'])->where('user_id',$data['user_id'])->count();
-        if($check > 0){
-            return back()->with('info','Item already added to Cart!');
+        $check = Cart::where('product_id', $data['product_id'])->where('user_id', $data['user_id'])->count();
+        if ($check > 0) {
+            return back()->with('info', 'Item already added to Cart!');
         }
 
         Cart::create($data);
-        return back()->with('success','Item added to Cart.');
-
+        return back()->with('success', 'Item added to Cart.');
     }
 
     /**
@@ -73,7 +73,7 @@ class CartController extends Controller
         //
     }
 
-   
+
     public function updateStock(Request $request, $id)
     {
         $cart = Cart::find($id);
@@ -81,8 +81,12 @@ class CartController extends Controller
             'quantity' => 'numeric|required',
         ]);
 
+        if ($data['quantity'] <= 0) {
+            return back()->with('error', 'Invalid Quantity!');
+        }
+
         $cart->update($data);
-        return back()->with('success','Quantity Updated Successfully');
+        return back()->with('success', 'Quantity Updated Successfully');
     }
 
     /**
@@ -90,8 +94,8 @@ class CartController extends Controller
      */
     public function destroy(Request $request)
     {
-        $cart= Cart::find($request->dataid);
+        $cart = Cart::find($request->dataid);
         $cart->delete();
-        return back()->with('success','Cart Deleted Successfully');
+        return back()->with('success', 'Cart Deleted Successfully');
     }
 }

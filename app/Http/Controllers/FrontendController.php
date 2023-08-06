@@ -13,9 +13,38 @@ class FrontendController extends Controller
 {
     public function index()
     {
+        /*
         $products = Product::orderBy('totalsells')->paginate(8);
         return view('user.index', compact('products'));
+        */
+
+
+        // Get all products from the database
+        $products = Product::all();
+
+        // Perform Bubble Sort based on the 'totalsells' column
+        $n = count($products);
+        for ($i = 0; $i < $n - 1; $i++) {
+            for ($j = 0; $j < $n - $i - 1; $j++) {
+                if ($products[$j]->totalsells > $products[$j + 1]->totalsells) {
+                    // Swap the products if they are in the wrong order
+                    $temp = $products[$j];
+                    $products[$j] = $products[$j + 1];
+                    $products[$j + 1] = $temp;
+                }
+            }
+        }
+
+        // Paginate the sorted products and pass them to the view
+        $perPage = 6;
+        $currentPage = request()->input('page', 1);
+        $products = collect($products)->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $products = new \Illuminate\Pagination\LengthAwarePaginator($products, count($products), $perPage, $currentPage);
+
+
+        return view('user.index', compact('products'));
     }
+
 
     public function products()
     {
@@ -95,8 +124,14 @@ class FrontendController extends Controller
         curl_close($ch);
 
         if ($status_code == 200) {
+
+
+
+
+            //order store ko code 
+
             return response()->json([
-                'success' => 1, 'redirecto' => route('user.index')
+                'success' => 1
             ]);
         } else {
             return response()->json(['error' => 1, 'message' => 'Payment Failed!']);

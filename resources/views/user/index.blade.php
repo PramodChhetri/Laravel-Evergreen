@@ -43,8 +43,7 @@
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Products</h2>
-            <p>The Top Products that are available in our site. </p>
+            <h2>Top Products</h2>
           </div>
   
           <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
