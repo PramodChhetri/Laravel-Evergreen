@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminNotificationController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -186,6 +187,10 @@ Route::middleware('auth')->group(function () {
     // Feedbacks
     Route::get('/messages', [ContactController::class, 'index'])->name('messages.index');
     Route::post('/messages/destroy', [ContactController::class, 'destroy'])->name('messages.destroy');
+
+    // Admin Notifications
+    Route::get('/adminnotifications', [AdminNotificationController::class, 'index'])->name('adminnotifications.index');
+    Route::post('/adminnotifications/destroy', [AdminNotificationController::class, 'destroy'])->name('adminnotifications.destroy');
 });
 
 // Khalti Veriy

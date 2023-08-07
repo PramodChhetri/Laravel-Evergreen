@@ -120,6 +120,7 @@
                     <a href="{{route('permissions.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Permissions</a>
                     <a href="{{route('feedbacks.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Feedbacks</a>
                     <a href="{{route('messages.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Messages</a>
+                    <a href="{{route('adminnotifications.index')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Notifications</a>
                     <a href="{{route('profile.edit')}}" class="text-xl text-white m-3 border-b-2 hover:bg-green-700 hover:text-white">Profile</a>
                     </div>
             </div>
