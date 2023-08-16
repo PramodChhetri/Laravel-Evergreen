@@ -57,3 +57,50 @@
 
   </div>
 </div>
+
+{{-- Notification --}}
+<div class="notification">
+  <div class="notification-container">
+      <h2 class="notification-title">Notifications</h2>
+      <div class="d-flex justify-content-end mb-3">
+          <a href="" class="text-right text-dark"><u>See all</u></a>
+      </div>
+      <ul class="list-unstyled">
+          <li class="px-2 py-3">
+              <div>
+                  <p class="m-0"><b>11:59 PM</b></p>
+                  <p class="m-0">Notification 1</p>
+              </div>
+          </li>
+          <li class="px-2 py-3">
+            <div>
+                <p class="m-0"><b>11:59 PM</b></p>
+                  <p class="m-0">Notification 2</p>
+              </div>
+          </li>
+          <li class="px-2 py-3">
+            <div>
+                <p class="m-0"><b>11:59 PM</b></p>
+                  <p class="m-0">Notification 3</p>
+              </div>
+          </li>
+          <li class="px-2 py-3">
+            <div>
+                <p class="m-0"><b>11:59 PM</b></p>
+                  <p class="m-0">Notification 4</p>
+              </div>
+          </li>
+          <li class="px-2 py-3">
+            <div>
+                <p class="m-0"><b>11:59 PM</b></p>
+                  <p class="m-0">Notification 5</p>
+              </div>
+          </li>
+      </ul>
+      <div class="d-flex justify-content-center mt-3">
+        <a href="" class="text-center text-dark"><u>Clear all</u></a>
+    </div>
+      <i class='bx bx-x' id="close-notification"></i>
+
+  </div>
+</div>

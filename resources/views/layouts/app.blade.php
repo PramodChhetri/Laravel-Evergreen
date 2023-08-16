@@ -14,6 +14,30 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <!-- Pusher App Name - evergreennepal -->
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+        <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('e8d7a1b0813126efbdb5', {
+          cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('adminnotification-channel');
+        channel.bind('userregister-event', function(data) {
+          alert(JSON.stringify(data));
+        });
+
+        channel.bind('sellrequest-event', function(data) {
+          alert(JSON.stringify(data));
+        });
+    
+        
+        </script>
+        <!-- Pusher Close  -->
+
         <!-- JQuery Table Script -->
         <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
         <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
@@ -59,7 +83,8 @@
             right: -320px; /* Initially hidden on the right */
             width: 400px; /* Increased width to 320px */
             z-index: 100;
-            padding: 20px;
+            padding-inline: 20px;
+            padding-top: 5px;
             border: 2px solid #e2e8f0; /* Add a beautiful border */
             border-radius: 4px; /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
@@ -98,6 +123,8 @@
         .notification-sidebar:not(.hidden) {
             right: 0;
         }
+
+        
           </style>
           
           
@@ -147,7 +174,7 @@
                           
                         <div class="flex items-center">
                             
-                            <div class="notification-container mr-8">
+                            <div class="notification-container mr-8 hover:bg-gray-400 focus:outline-none">
                                 <div>
                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
@@ -198,9 +225,11 @@
             </div>
 
             <!-- Notification Sidebar -->
-        <div id="notificationSidebar" class="notification-sidebar min-h-screen bg-white shadow-lg flex flex-col  py-24 hidden">
+        <div id="notificationSidebar" class="notification-sidebar min-h-screen bg-white shadow-lg hidden">
             <!-- Add content for the notification sidebar here -->
             <!-- For example, you can show the list of notifications -->
+            <span id="notificationSidebarClose" class="text-grey-900 font-bold hover:bg-gray-400 focus:outline-none" style="margin-left: 97%">X</span>
+            <div class="flex flex-col ">
             <h1 class="text-center text-grey-600 text-xl font-bold">Notifications</h1>
             <div class="relative">
                 <!-- Your content goes here -->
@@ -240,6 +269,7 @@
             </ul>
             
         </div>
+    </div>
         </div>
     
         <script>
@@ -256,6 +286,11 @@
             // JavaScript to toggle notification sidebar visibility
             const notificationToggle = document.querySelector('.notification-container');
             const notificationSidebar = document.getElementById('notificationSidebar');
+            const notificationSidebarClose = document.getElementById('notificationSidebarClose');
+
+            notificationSidebarClose.addEventListener('click', () => {
+                notificationSidebar.classList.toggle('hidden');
+            });
     
             notificationToggle.addEventListener('click', () => {
                 notificationSidebar.classList.toggle('hidden');

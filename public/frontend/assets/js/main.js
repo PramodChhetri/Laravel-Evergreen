@@ -272,6 +272,21 @@ closeCart.onclick = () =>{
   cart.classList.remove("active");
 };
 
+// User Notification Section Starts
+
+let notificationIcon = document.querySelector('#notification-icon');
+let notification = document.querySelector('.notification');
+let closeNotification = document.querySelector('#close-notification');
+
+//Open Cart
+notificationIcon.onclick = () =>{
+  notification.classList.add("active");
+};
+// Close Cart
+closeNotification.onclick = () =>{
+  notification.classList.remove("active");
+};
+
 
 // TinyMCE Textarea for feedback
 tinymce.init({

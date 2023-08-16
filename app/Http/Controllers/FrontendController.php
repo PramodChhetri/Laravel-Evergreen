@@ -26,7 +26,7 @@ class FrontendController extends Controller
         $n = count($products);
         for ($i = 0; $i < $n - 1; $i++) {
             for ($j = 0; $j < $n - $i - 1; $j++) {
-                if ($products[$j]->totalsells > $products[$j + 1]->totalsells) {
+                if ($products[$j]->totalsells < $products[$j + 1]->totalsells) {
                     // Swap the products if they are in the wrong order
                     $temp = $products[$j];
                     $products[$j] = $products[$j + 1];

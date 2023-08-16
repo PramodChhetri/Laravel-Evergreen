@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SellRequest;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\approval;
 use App\Models\Category;
@@ -23,6 +24,7 @@ class SellController extends Controller
     public function updatepan(Request $request, $id)
     {
         $user = User::find($id);
+        $username = $user->name;
         $data = $request->validate([
             'phone' => 'required',
             'address' => 'required',
@@ -42,6 +44,22 @@ class SellController extends Controller
         approval::create([
             'user_id' => $user->id,
         ]);
+
+        /**
+         * 
+         * Notification
+         * 
+         * 
+         */
+
+        /**
+         *
+         * 
+         * 
+         */
+
+        // Custom for notification in admin dashboard
+        event(new SellRequest($username));
 
         return redirect(route('user.sell.index'))->with('success', 'User Updated Successfully');
     }

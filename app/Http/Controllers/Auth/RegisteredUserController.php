@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistration;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -44,6 +45,9 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        // Custom for notification in admin dashboard
+        event(new UserRegistration($user->name));
 
         Auth::login($user);
 

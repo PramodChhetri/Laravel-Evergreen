@@ -48,13 +48,67 @@
   
 
 
-  <!-- =======================================================
-  * Template Name: Arsha
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+ <style>
+        .notification-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 4px;
+            font-size: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Style the notification sidebar */
+        .notification-sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px; /* Initially hidden on the right */
+            width: 400px; /* Increased width to 320px */
+            z-index: 100;
+            padding-inline: 20px;
+            padding-top: 5px;
+            border: 2px solid #e2e8f0; /* Add a beautiful border */
+            border-radius: 4px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+            transition: right 0.3s ease-in-out;
+        }
+
+        .notification-sidebar h1 {
+            color: #1f2937;
+            border-bottom: 2px solid #1f2937;
+        }
+
+        .notification-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .notification-sidebar li {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px; /* Rounded corners */
+            border: 1px solid #ccc;
+        }
+
+        .notification-sidebar li:hover {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e1e1e1;
+            border: 1px solid #a1a1a1;
+        }
+        .notification-sidebar li:last-child {
+            /* border-bottom: none; */
+        }
+
+        /* Animate the notification sidebar slide-in effect */
+        .notification-sidebar:not(.hidden) {
+            right: 0;
+        }
+ </style>
 </head>
 
 <body>
@@ -167,6 +221,22 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+
+  <script>
+    // JavaScript to toggle notification sidebar visibility
+    const notificationToggle = document.querySelector('.notification-container');
+            const notificationSidebar = document.getElementById('notificationSidebar');
+            const notificationSidebarClose = document.getElementById('notificationSidebarClose');
+
+            notificationSidebarClose.addEventListener('click', () => {
+                notificationSidebar.classList.toggle('hidden');
+            });
+    
+            notificationToggle.addEventListener('click', () => {
+                notificationSidebar.classList.toggle('hidden');
+            });
+    
+  </script>
 
   @include('layouts.usertoastr')
 
