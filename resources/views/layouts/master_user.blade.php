@@ -45,8 +45,47 @@
   <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
   <script src="{{asset('datatable/datatables.js')}}"></script>
 
-  
+  <!-- Pusher App Name - evergreennepal -->
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+    
+    var pusher = new Pusher('e8d7a1b0813126efbdb5', {
+      cluster: 'ap2'
+    });
+    
+    var channel = pusher.subscribe('adminnotification-channel');
+    
+    // Function to play a notification sound
+    function playNotificationSound() {
+      var audio = new Audio('{{asset('sound/notification1.mp3')}}'); // Replace with the actual path to your audio file
+      audio.play();
+    }
+    
+    channel.bind('orderapproved-event', function(data) {
+      // Play notification sound
+      playNotificationSound();
+      
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true
+      };
+      toastr.success(JSON.stringify(data), 'Approved!', { timeOut: 10000 });
+    });
+
+    channel.bind('ordercancelled-event', function(data) {
+      // Play notification sound
+      playNotificationSound();
+      
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true
+      };
+      toastr.error(JSON.stringify(data), 'Order Cancelled!', { timeOut: 10000 });
+    });
+  </script>
 
  <style>
         .notification-badge {

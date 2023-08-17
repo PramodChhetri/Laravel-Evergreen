@@ -14,6 +14,13 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+          {{-- Toast Cdn  --}}
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
         <!-- Pusher App Name - evergreennepal -->
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <script>
@@ -25,16 +32,36 @@
           cluster: 'ap2'
         });
 
+            // Function to play a notification sound
+    function playNotificationSound() {
+      var audio = new Audio('{{asset('sound/notification1.mp3')}}'); // Replace with the actual path to your audio file
+      audio.play();
+    }
+
+
         var channel = pusher.subscribe('adminnotification-channel');
         channel.bind('userregister-event', function(data) {
-          alert(JSON.stringify(data));
+          // Play notification sound
+      playNotificationSound();
+      
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true
+      };
+      toastr.success(JSON.stringify(data), 'New User!', { timeOut: 10000 });
         });
 
         channel.bind('sellrequest-event', function(data) {
-          alert(JSON.stringify(data));
+          // Play notification sound
+      playNotificationSound();
+      
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true
+      };
+      toastr.success(JSON.stringify(data), 'Sell Request!', { timeOut: 10000 });
         });
-    
-        
+       
         </script>
         <!-- Pusher Close  -->
 
