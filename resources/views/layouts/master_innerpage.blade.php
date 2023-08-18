@@ -37,22 +37,74 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-  <!-- Template Main CSS File -->
-  <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
+{{-- Toast Cdn  --}}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-  <!-- JQuery Table Script -->
-  <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
-  <link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
-  <script src="{{asset('datatable/datatables.js')}}"></script>
+<!-- Template Main CSS File -->
+<link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
 
+<!-- JQuery Table Script -->
+<script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
+<link rel="stylesheet" href="{{asset('datatable/datatables.css')}}">
+<script src="{{asset('datatable/datatables.js')}}"></script>
 
-  <!-- =======================================================
-  * Template Name: Arsha
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+<!-- Pusher App Name - evergreennepal -->
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
+<script>
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+  
+  var pusher = new Pusher('e8d7a1b0813126efbdb5', {
+    cluster: 'ap2'
+  });
+  
+  var channel = pusher.subscribe('adminnotification-channel');
+  
+  // Function to play a notification sound
+  function playNotificationSound() {
+    var audio = new Audio('{{asset('sound/notification1.mp3')}}'); // Replace with the actual path to your audio file
+    audio.play();
+  }
+  
+  channel.bind('orderapproved-event', function(data) {
+    // Play notification sound
+    playNotificationSound();
+    
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true
+    };
+    toastr.success(JSON.stringify(data), 'Approved!', { timeOut: 10000 });
+    });
+
+    channel.bind('sellrequestapproved-event', function(data) {
+      // if(Auth.user().id === data.id){
+    // Play notification sound
+    playNotificationSound();
+    
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true
+    };
+    toastr.success(JSON.stringify(data), 'Sell Request Approved!', { timeOut: 10000 });
+  // }
+  });
+
+  channel.bind('ordercancelled-event', function(data) {
+    // Play notification sound
+    playNotificationSound();
+    
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true
+    };
+    toastr.error(JSON.stringify(data), 'Order Cancelled!', { timeOut: 10000 });
+  });
+</script>
 </head>
 
 <body>

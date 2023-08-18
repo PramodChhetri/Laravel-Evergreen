@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderApproved;
+use App\Events\OrderCancelled;
 use App\Events\SellRequest;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\approval;
@@ -227,6 +229,7 @@ class SellController extends Controller
     public function ordersapprove($id)
     {
         $order = Order::find($id);
+        $user = User::find($order->buyer_id);
         $quantity = $order->quantity;
         $productId = $order->product_id;
         $product = Product::find($productId);
@@ -241,6 +244,14 @@ class SellController extends Controller
             $order->update([
                 'status' => 'Approved'
             ]);
+
+            /*
+            *
+            *
+            *
+            */
+            event(new OrderApproved($user));
+
             return redirect(route('user.sell.orders'))->with('success', 'Order Approved Successfully!');
         }
     }
@@ -287,7 +298,16 @@ class SellController extends Controller
     public function ordersdestroy(Request $request)
     {
         $orders = Order::find($request->dataid);
+        $user = User::find($orders->buyer_id);
         $orders->delete();
+
+        /*
+        *
+        *
+        *
+        */
+        event(new OrderCancelled($user));
+
         return redirect(route('user.sell.orders'))->with('success', 'Order Deleted Successfully!');
     }
 }

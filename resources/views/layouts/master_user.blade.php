@@ -73,6 +73,19 @@
         "progressBar": true
       };
       toastr.success(JSON.stringify(data), 'Approved!', { timeOut: 10000 });
+      });
+
+      channel.bind('sellrequestapproved-event', function(data) {
+        // if(Auth.user().id === data.id){
+      // Play notification sound
+      playNotificationSound();
+      
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true
+      };
+      toastr.success(JSON.stringify(data), 'Sell Request Approved!', { timeOut: 10000 });
+    // }
     });
 
     channel.bind('ordercancelled-event', function(data) {
@@ -85,6 +98,8 @@
       };
       toastr.error(JSON.stringify(data), 'Order Cancelled!', { timeOut: 10000 });
     });
+
+    
   </script>
 
  <style>
