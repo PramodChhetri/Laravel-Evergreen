@@ -14,14 +14,14 @@ class OrderApproved implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
+    public $notification;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($user)
+    public function __construct($notification)
     {
-        $this->user = $user;
+        $this->notification = $notification;
     }
 
     /**

@@ -82,6 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/sells/ordersapproved', [SellController::class, 'ordersapproved'])->name('user.sell.ordersapproved');
     Route::get('/user/sells/ordersreturned', [SellController::class, 'ordersreturned'])->name('user.sell.ordersreturned');
     Route::get('/user/sells/orderscompleted', [SellController::class, 'orderscompleted'])->name('user.sell.orderscompleted');
+    Route::post('/user/sell/orders/cancel', [SellController::class, 'orderscancel'])->name('user.sell.orders.cancel');
     Route::post('/user/sell/orders/destroy', [SellController::class, 'ordersdestroy'])->name('user.sell.orders.destroy');
     Route::get('/user/sell/orders/{id}/approve', [SellController::class, 'ordersapprove'])->name('user.sell.orders.approve');
     Route::get('/user/sell/orders/{id}/return', [SellController::class, 'ordersreturn'])->name('user.sell.orders.return');
@@ -94,6 +95,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/orders/store', [OrderController::class, 'store'])->name('user.orders.store');
     Route::post('/user/orders/destroy', [OrderController::class, 'ordersdestroy'])->name('user.orders.destroy');
 
+    // 
+    Route::get('/user/orders/orderhistory', [OrderController::class, 'orderhistory'])->name('user.orders.orderhistory');
+
     //Feedback
     Route::post('/user/feedbacks/store', [FeedbackController::class, 'store'])->name('user.feedbacks.store');
 
@@ -105,6 +109,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //User Profile
     Route::get('/user/profile/', [UserProfileContoller::class, 'index'])->name('user.profile.index');
+
+    // User Notification
+    Route::get('/user/notifications', [FrontendController::class, 'notificationspage'])->name('user.notifications');
+    Route::get('/user/notifications/{id}/redirect', [FrontendController::class, 'notificationredireact'])->name('user.notification.redireact');
+    Route::get('/user/notifications/markasread', [FrontendController::class, 'markallasread'])->name('user.notifications.markallasread');
+    Route::get('/user/notifications/markasunread', [FrontendController::class, 'markallasunread'])->name('user.notifications.markallasunread');
 });
 
 // Role and Permission

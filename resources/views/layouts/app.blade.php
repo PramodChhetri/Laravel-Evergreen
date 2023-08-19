@@ -48,7 +48,7 @@
         "closeButton": true,
         "progressBar": true
       };
-      toastr.success(JSON.stringify(data), 'New User!', { timeOut: 10000 });
+      toastr.success(JSON.stringify(data.notification.content), 'New User!', { timeOut: 10000 });
         });
 
         channel.bind('sellrequest-event', function(data) {
@@ -59,7 +59,7 @@
         "closeButton": true,
         "progressBar": true
       };
-      toastr.success(JSON.stringify(data), 'Sell Request!', { timeOut: 10000 });
+      toastr.success(JSON.stringify(data.notification.content), 'Sell Request!', { timeOut: 10000 });
         });
        
         </script>

@@ -72,7 +72,8 @@
                                 <p class="bg bg-success p-1">{{$OD->status}}</p>
                               </td>
                               <td>
-                              <a href="{{route('user.sell.orders.return',$OD->id)}}" class="btn btn-danger">Returned</a>
+                              <a href="{{route('user.sell.orders.return',$OD->id)}}" class="btn btn-secondary">Returned</a>
+                              <button id="btn-action-delete" class="btn btn-danger" data-product-id="{{ $OD->id }}">Delete</button>
                               </td>
                           </tr>
                         @endforeach
@@ -87,7 +88,7 @@
     
     
     
-    <div id="deleteModal" class="modal fade">
+    <div id="deleteModal" class="modal">
     <div class="modal-dialog">
     <div class="modal-content bg-white p-4 rounded-lg">
     <form action="{{route('user.sell.orders.destroy')}}" method="POST">

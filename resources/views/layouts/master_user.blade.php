@@ -49,6 +49,9 @@
   <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
   <script>
+
+    var userId = {{ Auth::user()->id }};
+  
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
     
@@ -65,6 +68,8 @@
     }
     
     channel.bind('orderapproved-event', function(data) {
+      console.log(data.notification.user_id); // Debugging line
+      if (userId === data.notification.user_id) {
       // Play notification sound
       playNotificationSound();
       
@@ -72,11 +77,13 @@
         "closeButton": true,
         "progressBar": true
       };
-      toastr.success(JSON.stringify(data), 'Approved!', { timeOut: 10000 });
+      toastr.success(JSON.stringify(data.notification.content), 'Approved!', { timeOut: 10000 });
+      }
       });
-
+  
       channel.bind('sellrequestapproved-event', function(data) {
-        // if(Auth.user().id === data.id){
+        console.log(data.notification.user_id); // Debugging line
+      if (userId === data.notification.user_id) {
       // Play notification sound
       playNotificationSound();
       
@@ -84,11 +91,42 @@
         "closeButton": true,
         "progressBar": true
       };
-      toastr.success(JSON.stringify(data), 'Sell Request Approved!', { timeOut: 10000 });
-    // }
+      toastr.success(JSON.stringify(data.notification.content), 'Sell Request Approved!', { timeOut: 10000 });
+    }
     });
-
+  
+    channel.bind('sellrequestdeclined-event', function(data) {
+      console.log(data.notification.user_id); // Debugging line
+      if (userId === data.notification.user_id) {
+        // Play notification sound
+        playNotificationSound();
+        
+        toastr.options = {
+          "closeButton": true,
+          "progressBar": true
+        };
+        toastr.success(JSON.stringify(data.notification.content), 'Sell Request Declined!', { timeOut: 10000 });
+      }
+      });
+  
+      channel.bind('neworder-event', function(data) {
+        console.log(data.notification.user_id); // Debugging line
+      if (userId === data.notification.user_id) {
+          // Play notification sound
+          playNotificationSound();
+  
+          toastr.options = {
+              "closeButton": true,
+              "progressBar": true
+          };
+          toastr.success(JSON.stringify(data.notification.content), 'New Order!', { timeOut: 10000 });
+      }
+  });
+  
+  
     channel.bind('ordercancelled-event', function(data) {
+      console.log(data.notification.user_id); // Debugging line
+      if (userId === data.notification.user_id) {
       // Play notification sound
       playNotificationSound();
       
@@ -96,10 +134,9 @@
         "closeButton": true,
         "progressBar": true
       };
-      toastr.error(JSON.stringify(data), 'Order Cancelled!', { timeOut: 10000 });
+      toastr.error(JSON.stringify(data.notification.content), 'Order Cancelled!', { timeOut: 10000 });
+    }
     });
-
-    
   </script>
 
  <style>

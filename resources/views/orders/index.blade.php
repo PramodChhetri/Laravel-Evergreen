@@ -29,6 +29,8 @@
               <td>{{$OD->total_price}}</td>
               <td>
                 @if ($OD->status == "Returned")
+                <p class="bg-red-600 p-1" >{{$OD->status}}</p>
+                @elseif ($OD->status == "Cancelled")
                 <p class="bg-red-600 p-1" >{{$OD->status}}</p> 
                 @elseif($OD->status == "Completed")
                 <p class="bg-green-600 p-1" >{{$OD->status}}</p> 

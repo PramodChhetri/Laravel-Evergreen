@@ -88,10 +88,10 @@
     
     
     
-    <div id="deleteModal" class="modal fade">
+    <div id="deleteModal" class="modal">
     <div class="modal-dialog">
     <div class="modal-content bg-white p-4 rounded-lg">
-    <form action="{{route('user.sell.orders.destroy')}}" method="POST">
+    <form action="{{route('user.sell.orders.cancel')}}" method="POST">
     @csrf
     <p class="modal-title text-2xl">Are you sure you want to Cancel?</p>
     <input type="hidden" name="dataid" id="dataid" value="">

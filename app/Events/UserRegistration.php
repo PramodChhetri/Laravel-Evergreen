@@ -14,14 +14,14 @@ class UserRegistration implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $username;
+    public $notification;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($username)
+    public function __construct($notification)
     {
-        $this->username = $username;
+        $this->notification = $notification;
     }
 
     /**

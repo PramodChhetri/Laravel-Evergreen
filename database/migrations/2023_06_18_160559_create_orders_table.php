@@ -20,8 +20,7 @@ return new class extends Migration
             $table->decimal('total_price', 8, 2);
             $table->date('date');
             $table->enum('payment_method', ['Online', 'Cash on Delivery', 'Pending'])->default('Pending');
-            // $table->enum('payment_status', ['Complete', 'Pending'])->default('Pending');
-            // $table->enum('payment_method', ['Khalti', 'Cash on Delivery', 'Pending'])->default('Pending');
+            $table->string('transaction_token')->nullable();
             $table->string('buyeremail')->nullable();
             $table->string('buyername')->nullable();
             $table->string('buyercontact')->nullable();
@@ -30,7 +29,6 @@ return new class extends Migration
             $table->text('buyerstate')->nullable();
             $table->text('buyerzip')->nullable();
             $table->string('status')->default('Pending');
-            // $table->enum('status', ['Returned', 'Completed', 'Approved', 'Pending'])->default('Pending');
             $table->timestamps();
         });
     }

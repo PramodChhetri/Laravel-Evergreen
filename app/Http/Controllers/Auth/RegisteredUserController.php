@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\UserRegistration;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -44,10 +45,16 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
+        $notification = Notification::create([
+            'title' => 'NewUser',
+            'content' => 'New User of name ' . $user->name . ' at ' . $user->created_at . ' has registered.',
+            'status' => 'Queue',
+            'user_id' => $user->id,
+        ]);
         // Custom for notification in admin dashboard
-        event(new UserRegistration($user->name));
+        event(new UserRegistration($notification));
 
         Auth::login($user);
 

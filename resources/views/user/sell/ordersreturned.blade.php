@@ -72,7 +72,7 @@
                                 <p class="bg bg-info p-1">{{$OD->status}}</p>
                               </td>
                               <td>
-                              <button id="btn-action-delete" class="btn btn-danger" data-product-id="{{ $OD->id }}">Cancel</button>
+                              <button id="btn-action-delete" class="btn btn-danger" data-product-id="{{ $OD->id }}">Delete</button>
                           </tr>
                         @endforeach
                     </tbody>
@@ -86,7 +86,7 @@
     
     
     
-    <div id="deleteModal" class="modal fade">
+    <div id="deleteModal" class="modal">
     <div class="modal-dialog">
     <div class="modal-content bg-white p-4 rounded-lg">
     <form action="{{route('user.sell.orders.destroy')}}" method="POST">

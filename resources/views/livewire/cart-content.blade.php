@@ -6,7 +6,7 @@
 
 <div id="notification-icon">
   <i class='bx bx-bell'></i>
-  <span class='badge badge-warning' id='lblCartCount'> 1 </span>
+  <span class='badge badge-warning' id='lblCartCount'> {{$countnotification}} </span>
 </div>
 
 </nav><!-- .navbar -->
@@ -63,42 +63,22 @@
   <div class="notification-container">
       <h2 class="notification-title">Notifications</h2>
       <div class="d-flex justify-content-end mb-3">
-          <a href="" class="text-right text-dark"><u>See all</u></a>
+          <a href="{{route('user.notifications')}}" class="text-right text-dark"><u>See all</u></a>
       </div>
       <ul class="list-unstyled">
-          <li class="px-2 py-3">
-              <div>
-                  <p class="m-0"><b>11:59 PM</b></p>
-                  <p class="m-0">Notification 1</p>
-              </div>
-          </li>
+        @foreach ($queuenotification as $qn)
+        <a href="{{route('user.notification.redireact',$qn->id)}}">
           <li class="px-2 py-3">
             <div>
-                <p class="m-0"><b>11:59 PM</b></p>
-                  <p class="m-0">Notification 2</p>
-              </div>
-          </li>
-          <li class="px-2 py-3">
-            <div>
-                <p class="m-0"><b>11:59 PM</b></p>
-                  <p class="m-0">Notification 3</p>
-              </div>
-          </li>
-          <li class="px-2 py-3">
-            <div>
-                <p class="m-0"><b>11:59 PM</b></p>
-                  <p class="m-0">Notification 4</p>
-              </div>
-          </li>
-          <li class="px-2 py-3">
-            <div>
-                <p class="m-0"><b>11:59 PM</b></p>
-                  <p class="m-0">Notification 5</p>
-              </div>
-          </li>
+                <p class="m-0" style="color: #37517e;"><b>{{ $qn->created_at->format('h:i A') }}</b></p>
+                <p class="m-0 text-dark" style="font-weight: 400;">{{$qn->content}}</p>
+            </div>
+        </li>
+        </a>
+        @endforeach
       </ul>
       <div class="d-flex justify-content-center mt-3">
-        <a href="" class="text-center text-dark"><u>Clear all</u></a>
+        <a href="{{route('user.notifications.markallasunread')}}" class="text-center text-dark"><u>Clear all</u></a>
     </div>
       <i class='bx bx-x' id="close-notification"></i>
 

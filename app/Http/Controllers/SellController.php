@@ -8,6 +8,7 @@ use App\Events\SellRequest;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\approval;
 use App\Models\Category;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
@@ -54,6 +55,12 @@ class SellController extends Controller
          * 
          */
 
+        $notification = Notification::create([
+            'title' => 'SellRequest',
+            'content' => 'New user of name ' . $user->name . ' has requested to sell. Review the User.',
+            'status' => 'Queue',
+            'user_id' => $user->id,
+        ]);
         /**
          *
          * 
@@ -61,7 +68,7 @@ class SellController extends Controller
          */
 
         // Custom for notification in admin dashboard
-        event(new SellRequest($username));
+        event(new SellRequest($notification));
 
         return redirect(route('user.sell.index'))->with('success', 'User Updated Successfully');
     }
@@ -233,6 +240,7 @@ class SellController extends Controller
         $quantity = $order->quantity;
         $productId = $order->product_id;
         $product = Product::find($productId);
+        $productname = $product->name;
         $stock = $product->stock;
 
         if ($stock < $quantity) {
@@ -250,10 +258,43 @@ class SellController extends Controller
             *
             *
             */
-            event(new OrderApproved($user));
+            $notification = Notification::create([
+                'title' => 'OrderApproved',
+                'content' => 'Your Order of ' . $productname . ' at ' . $order->created_at . ' has been approved.',
+                'status' => 'Queue',
+                'user_id' => $order->buyer_id,
+            ]);
+            event(new OrderApproved($notification));
 
             return redirect(route('user.sell.orders'))->with('success', 'Order Approved Successfully!');
         }
+    }
+
+    public function orderscancel(Request $request)
+    {
+        $order = Order::find($request->dataid);
+        $user = User::find($order->buyer_id);
+        $product = Product::find($order->product_id);
+        $productname = $product->name;
+        $order->update([
+            'status' => 'Cancelled'
+        ]);
+
+        /*
+        *
+        *
+        *
+        */
+        $notification = Notification::create([
+            'title' => 'OrderCancelled',
+            'content' => 'Your Order of ' . $productname . ' at ' . $order->created_at . ' has been cancelled.',
+            'status' => 'Queue',
+            'user_id' => $order->buyer_id,
+        ]);
+
+        event(new OrderCancelled($notification));
+
+        return back()->with('error', 'Order Cancelled Successfully!');
     }
 
     public function orderscomplete($id)
@@ -301,12 +342,6 @@ class SellController extends Controller
         $user = User::find($orders->buyer_id);
         $orders->delete();
 
-        /*
-        *
-        *
-        *
-        */
-        event(new OrderCancelled($user));
 
         return redirect(route('user.sell.orders'))->with('success', 'Order Deleted Successfully!');
     }

@@ -9,7 +9,7 @@
             <h2>Orders</h2>
             <ol>
                 <li><a href="{{route('user.index')}}">Home</a></li>
-                <li>Orders</li>
+                <li>Cart</li>
             </ol>
         </div>
 
@@ -26,10 +26,10 @@
                     <a class="nav-link" href="{{route('user.orders.index')}}">Current Orders</a>
                 </li>
                 <li >
-                    <a class="nav-link" href="#">Order History</a>
+                    <a class="nav-link" href="{{route('user.orders.orderhistory')}}">Order History</a>
                 </li>
                 <li >
-                    <a class="nav-link" href="{{route('user.orders.cart')}}">Your Cart</a>
+                    <a class="nav-link" href="{{route('user.orders.cart')}}">Cart</a>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
             <div class="card" style="background: #f3f5fa">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h2 style="color: #283a5ae6;">Your Cart</h2>
+                        <h2 style="color: #283a5ae6;">Cart</h2>
                     </div>
 
                     <!-- Success Message -->

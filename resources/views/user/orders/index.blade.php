@@ -27,7 +27,7 @@
           <a class="nav-link" href="{{route('user.orders.index')}}">Current Orders</a>
         </li>
         <li >
-            <a class="nav-link" href="#">Order History</a>
+          <a class="nav-link" href="{{route('user.orders.orderhistory')}}">Order History</a>
         </li>
         <li >
             <a class="nav-link" href="{{route('user.orders.cart')}}">Cart</a>

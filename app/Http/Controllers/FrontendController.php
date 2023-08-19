@@ -6,8 +6,10 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Feedback;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -136,5 +138,58 @@ class FrontendController extends Controller
         } else {
             return response()->json(['error' => 1, 'message' => 'Payment Failed!']);
         }
+    }
+
+    public function notificationspage()
+    {
+        $notifications = Notification::where('user_id', Auth::id())->latest()->paginate(10);
+        return view('user.notifications', compact('notifications'));
+    }
+
+    public function notificationredireact($id)
+    {
+        $notification = Notification::find($id);
+
+        $notification->update([
+            'status' => 'Read',
+        ]);
+
+        if ($notification->title == 'SellRequestDeclined' || $notification->title == 'SellRequestAccepted') {
+            return redirect(route('user.sell.index'));
+        } elseif ($notification->title == 'NewUser') {
+            return redirect(route('alluser.index'));
+        } elseif ($notification->title == 'NewOrder') {
+            return redirect(route('user.sell.orders'));
+        } elseif ($notification->title == 'SellRequest') {
+            return redirect(route('approval.index'));
+        } else {
+            return redirect(route('user.orders.index'));
+        }
+    }
+
+    public function markallasread()
+    {
+        $needednotifications = Notification::where('user_id', Auth::id())->get();
+
+        foreach ($needednotifications as $ntf) {
+            $ntf->update([
+                'status' => 'Read'
+            ]);
+        }
+
+        return redirect(route('user.notifications'));
+    }
+
+    public function markallasunread()
+    {
+        $notifications = Notification::where('user_id', Auth::id())->where('status', 'Queue')->get();
+
+        foreach ($notifications as $ntf) {
+            $ntf->update([
+                'status' => 'Unread'
+            ]);
+        }
+
+        return back();
     }
 }
