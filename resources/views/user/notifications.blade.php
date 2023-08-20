@@ -97,6 +97,8 @@
                           {{ $notifications->links() }} <!-- Display pagination links -->
                         </div>
                       </div>
+
+                      
                   </div>
               </div>
           </div>

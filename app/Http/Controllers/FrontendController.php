@@ -177,7 +177,7 @@ class FrontendController extends Controller
             ]);
         }
 
-        return redirect(route('user.notifications'));
+        return back();
     }
 
     public function markallasunread()

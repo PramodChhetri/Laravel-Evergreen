@@ -59,7 +59,7 @@ class SellController extends Controller
             'title' => 'SellRequest',
             'content' => 'New user of name ' . $user->name . ' has requested to sell. Review the User.',
             'status' => 'Queue',
-            'user_id' => $user->id,
+            'user_id' => 1,
         ]);
         /**
          *

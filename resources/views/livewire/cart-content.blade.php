@@ -66,6 +66,7 @@
           <a href="{{route('user.notifications')}}" class="text-right text-dark"><u>See all</u></a>
       </div>
       <ul class="list-unstyled">
+        <?php $count = 0 ?>
         @foreach ($queuenotification as $qn)
         <a href="{{route('user.notification.redireact',$qn->id)}}">
           <li class="px-2 py-3">
@@ -75,11 +76,15 @@
             </div>
         </li>
         </a>
+        <?php $count = $count + 1; ?>
         @endforeach
-      </ul>
+    </ul>
+    <?php if($count != 0){  ?>
       <div class="d-flex justify-content-center mt-3">
         <a href="{{route('user.notifications.markallasunread')}}" class="text-center text-dark"><u>Clear all</u></a>
-    </div>
+      </div>
+    <?php } ?>
+
       <i class='bx bx-x' id="close-notification"></i>
 
   </div>
