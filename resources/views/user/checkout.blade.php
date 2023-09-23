@@ -13,7 +13,7 @@
     <div class="d-flex justify-content-between align-items-center">
       <h2>Checkout</h2>
       <ol>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="{{route('user.index')}}">Home</a></li>
         <li>Checkout</li>
       </ol>
     </div>

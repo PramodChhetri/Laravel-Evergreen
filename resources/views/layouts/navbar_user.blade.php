@@ -10,19 +10,18 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a href="{{route('user.index')}}">Home</a></li>
-
-          <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="team.html">Team</a></li>
-              <li><a href="testimonials.html">Testimonials</a></li>
-            </ul>
-          </li>
           <li><a href="{{route('user.products')}}">Products</a></li>
           <li><a href="{{route('user.sell.index')}}">Seller Center</a></li>
           <li><a href="{{route('user.orders.index')}}">Orders</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li class="dropdown"><a href="#"><span>{{Auth::user()->name}}</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="{{route('user.aboutus')}}"><span>About</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{{route('user.aboutus')}}">About Us</a></li>
+              <li><a href="{{route('user.team')}}">Team</a></li>
+              <li><a href="{{route('user.pricing')}}">Pricing</a></li>
+            </ul>
+          </li>
+          <li><a href="{{route('user.contactus')}}">Contact Us</a></li>
+          <li class="dropdown"><a href="{{route('user.profile.index')}}"><span>{{Auth::user()->name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{route('user.profile.index')}}">
                <span>Profile</span></a></li>

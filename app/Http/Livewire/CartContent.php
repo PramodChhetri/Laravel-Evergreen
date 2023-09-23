@@ -43,22 +43,6 @@ class CartContent extends Component
         $this->calculateTotal();
     }
 
-    public function incrementQty($id)
-    {
-        $cart = Cart::find($id);
-        $cart->quantity += 1;
-        $cart->save();
-        session()->flash('success', 'Quantity Updated!');
-        $this->loadCartData();
-    }
-
-    public function removeCart($id)
-    {
-        Cart::destroy($id);
-        session()->flash('success', 'Item has been removed!');
-        $this->loadCartData();
-    }
-
     public function calculateTotal()
     {
         $this->sum = $this->carts->sum(function ($cart) {

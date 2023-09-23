@@ -2,6 +2,17 @@
 
 @section('home_content')
         
+
+<style>
+  #portfolio {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#portfolio:hover {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2), 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+</style>
     
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">
@@ -38,12 +49,12 @@
         </div>
       </section><!-- End Cliens Section -->
 
-      <!-- ======= Portfolio Section ======= -->
+      <!-- ======= Top  Portfolio Section ======= -->
       <section id="portfolio" class="portfolio">
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Top Products</h2>
+            <h2>Recommended Products</h2>
           </div>
   
           <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -55,20 +66,20 @@
   
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
   
-            @foreach ($products as $product)
+            @foreach ($topproducts as $topproduct)
       
-            <div class="col-lg-4 col-md-6 portfolio-item filter-{{$product->condition}}">
-              <a href="{{route('user.productdetail',$product->id)}}">
-                <div class="portfolio-img"><img src="{{ asset('images/products/'.$product->photopath) }}" class="img-fluid" alt=""></div>
+            <div class="col-lg-4 col-md-6 portfolio-item filter-{{$topproduct->condition}}">
+              <a href="{{route('user.productdetail',$topproduct->id)}}">
+                <div class="portfolio-img"><img src="{{ asset('images/products/'.$topproduct->photopath) }}" class="img-fluid" alt=""></div>
                 <div class="portfolio-info">
                 </a>
-                <h4>{{$product->name}}</h4>
-                <p>Rs. {{$product->price}} (Available: {{$product->stock}})</p>
+                <h4>{{$topproduct->name}}</h4>
+                <p>Rs. {{$topproduct->price}} (Available: {{$topproduct->stock}})</p>
                 <div style="display:flex;">
-                  <a href="{{ asset('images/products/'.$product->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$product->name}}" style="height: 45px"><i class='bx bx-zoom-in'></i></i></a>
+                  <a href="{{ asset('images/products/'.$topproduct->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$topproduct->name}}" style="height: 45px"><i class='bx bx-zoom-in'></i></i></a>
                   <form action="{{route('user.orders.cart.store')}}" method="POST">
                     @csrf
-                  <input type="hidden" name="product_id" value="{{$product->id}}"> 
+                  <input type="hidden" name="product_id" value="{{$topproduct->id}}"> 
                   <input type="number" name="quantity" value="1" id="products-quantity">
                   <button type="submit" id="add-to-cart">+</button>
                   </form>
@@ -84,8 +95,51 @@
         </div>
       </section><!-- End Portfolio Section -->
 
+{{-- Top category --}}
+
+@foreach ($topFourCategories as $category)
+    <!-- ======= Top Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Top {{ $category->name }} Products</h2>
+            </div>
+
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                @foreach ($topThreeProductsByCategory[$category->name] as $product)
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $product->condition }}">
+                        <a href="{{ route('user.productdetail', $product->id) }}">
+                            <div class="portfolio-img"><img src="{{ asset('images/products/'.$product->photopath) }}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="portfolio-info">
+                                <h4>{{ $product->name }}</h4>
+                                <p>Rs. {{ $product->price }} (Available: {{ $product->stock }})</p>
+                                <div style="display:flex;">
+                                    <a href="{{ asset('images/products/'.$product->photopath) }}"
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"
+                                        title="{{ $product->name }}" style="height: 45px"><i class='bx bx-zoom-in'></i></a>
+                                    <form action="{{ route('user.orders.cart.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="number" name="quantity" value="1" id="products-quantity">
+                                        <button type="submit" id="add-to-cart">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section><!-- End Portfolio Section -->
+@endforeach
+
+
+
+
+
       <!-- ======= About Us Section ======= -->
-      <section id="about" class="about">
+      <section id="about" class="about section-bg">
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
@@ -107,7 +161,7 @@
               <p>
                 Founded in 2020 by Pramod Chhetri, Evergreen is a trusted online destination.Our mission is to provide a seamless and enjoyable shopping experience. Exceptional customer service is our top priority. Explore our online store for a diverse selection that reflects the latest trends.Join our community of discerning shoppers and stay updated on our newsletter and social media.
               </p>
-              <a href="/about" class="btn-learn-more">Learn More</a>
+              <a href="{{route('user.aboutus')}}" class="btn-learn-more">Learn More</a>
             </div>
           </div>
   

@@ -123,8 +123,7 @@
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Products</h2>
-            <p>The Top Products that are available in our site. </p>
+            <h2>Top Products</h2>
           </div>
   
           <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -136,20 +135,23 @@
   
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
   
-            @foreach ($products as $product)
+            @foreach ($topproducts as $topproduct)
       
-            <div class="col-lg-4 col-md-6 portfolio-item filter-{{$product->condition}}">
-              <a href="{{route('user.productdetail',$product->id)}}">
-                <div class="portfolio-img"><img src="{{ asset('images/products/'.$product->photopath) }}" class="img-fluid" alt=""></div>
+            <div class="col-lg-4 col-md-6 portfolio-item filter-{{$topproduct->condition}}">
+              <a href="{{route('user.productdetail',$topproduct->id)}}">
+                <div class="portfolio-img"><img src="{{ asset('images/products/'.$topproduct->photopath) }}" class="img-fluid" alt=""></div>
                 <div class="portfolio-info">
                 </a>
-                <h4>{{$product->name}}</h4>
-                <p>Rs. {{$product->price}} (Available: {{$product->stock}})</p>
+                <h4>{{$topproduct->name}}</h4>
+                <p>Rs. {{$topproduct->price}} (Available: {{$topproduct->stock}})</p>
                 <div style="display:flex;">
-                  <a href="{{ asset('images/products/'.$product->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$product->name}}" style="height: 45px"><i class='bx bx-zoom-in'></i></i></a>
-                  <input type="hidden" name="product_id" value="{{$product->id}}"> 
+                  <a href="{{ asset('images/products/'.$topproduct->photopath) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="{{$topproduct->name}}" style="height: 45px"><i class='bx bx-zoom-in'></i></i></a>
+                  <form action="{{route('user.orders.cart.store')}}" method="POST">
+                    @csrf
+                  <input type="hidden" name="product_id" value="{{$topproduct->id}}"> 
                   <input type="number" name="quantity" value="1" id="products-quantity">
-                  <a href="/login"><button id="add-to-cart">+</button></a>
+                  <button type="submit" id="add-to-cart">+</button>
+                  </form>
                 </div>
         
               </div>
@@ -159,10 +161,8 @@
   
           </div>
   
-          </div>
-  
         </div>
-      </section><!-- End Portfolio Section -->
+          </section><!-- End Portfolio Section -->
   
       <!-- ======= Team Section ======= -->
       <section id="team" class="team section-bg">
@@ -308,7 +308,7 @@
   
       <!-- ======= Frequently Asked Questions Section ======= -->
       <section id="faq" class="faq section-bg">
-        <div class="container" data-aos="fade-up">
+        <div class="container" >
   
           <div class="section-title">
             <h2>Frequently Asked Questions</h2>
@@ -318,8 +318,8 @@
           <div class="faq-list">
             <ul>
               <li data-aos="fade-up" data-aos-delay="100">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Can anyone can sell products in this site? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <i class="bx bx-help-circle icon-help"></i> <a data-bs-target="#faq-list-1">Can anyone can sell products in this site? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="faq-list-1"  data-bs-parent=".faq-list">
                   <p>
                     Yes, anyone who have been verified by our time can sell their products. Verification method is very simple. You have to share your PAN details and we will response to your request.
                   </p>
@@ -327,8 +327,8 @@
               </li>
   
               <li data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">What are the payment methods? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <i class="bx bx-help-circle icon-help"></i> <a data-bs-target="#faq-list-2" >What are the payment methods? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="faq-list-2"  data-bs-parent=".faq-list">
                   <p>
                     There are two ways you can do your payment; 1. Using your Debit/Credit Card 2.Cash on delivery
                   </p>
@@ -336,8 +336,8 @@
               </li>
   
               <li data-aos="fade-up" data-aos-delay="300">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">What type of products are available in your sites? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <i class="bx bx-help-circle icon-help"></i> <a data-bs-target="#faq-list-3" >What type of products are available in your sites? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="faq-list-3"  data-bs-parent=".faq-list">
                   <p>
                     In our platform user can sell brand new as well as used products.
                   </p>
@@ -345,17 +345,17 @@
               </li>
   
               <li data-aos="fade-up" data-aos-delay="400">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Is your platform follows user C2C model? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <i class="bx bx-help-circle icon-help"></i> <a  data-bs-target="#faq-list-4" >Is your platform follows user C2C model? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="faq-list-4"  data-bs-parent=".faq-list">
                   <p>
                     Yes we follow C2C as well as B2C model.
                   </p>
                 </div>
               </li>
   
-              <li data-aos="fade-up" data-aos-delay="500">
-                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">How your site verify business? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+              <li >
+                <i class="bx bx-help-circle icon-help"></i> <a data-bs-target="#faq-list-5" >How your site verify business? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <div id="faq-list-5"  data-bs-parent=".faq-list">
                   <p>
                     Verification method is very simple. You have to share your PAN details and we will response to your request.
                   </p>
@@ -367,7 +367,7 @@
   
         </div>
       </section><!-- End Frequently Asked Questions Section -->
-  
+ 
       <!-- ======= Contact Section ======= -->
       <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">

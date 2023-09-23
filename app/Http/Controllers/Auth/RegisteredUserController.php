@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
             'title' => 'NewUser',
             'content' => 'New User of name ' . $user->name . ' at ' . $user->created_at . ' has registered.',
             'status' => 'Queue',
-            'user_id' => $user->id,
+            'user_id' => 1,
         ]);
         // Custom for notification in admin dashboard
         event(new UserRegistration($notification));

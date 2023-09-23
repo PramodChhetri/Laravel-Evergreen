@@ -27,9 +27,9 @@
                   <div class="cart-product-title">{{$cart->product->name}}</div>
                   <div class="cart-price">Rs. {{$cart->product->price}}</div>
                   <div>
-                    <button class="cart-btn" wire:click="decreaseQty({{$cart->id}})">-</button>
+                    <a style="padding-inline: 8px; padding-top:4px; padding-bottom:4px;" class="cart-btn" href="{{route('user.orders.cart')}}">-</a>
                     <span class="cart-quantity">{{$cart->quantity}}</span>
-                    <button class="cart-btn" wire:click="incrementQty({{$cart->id}})">+</button>
+                    <a class="cart-btn" style="padding-inline: 8px; padding-top:4px; padding-bottom:4px;" href="{{route('user.orders.cart')}}">+</a>
                     
                   </div>
                   @php
@@ -37,7 +37,7 @@
                   @endphp
               </div>
               {{-- Remove Cart --}}
-              <a wire:click.prevent="removeCart('{{$cart['id']}}')"> <i class='bx bxs-trash-alt cart-remove'></i></a>
+              <a href="{{route('user.orders.cart')}}"> <i class='bx bxs-trash-alt cart-remove'></i></a>
 
           </div>
       </div>

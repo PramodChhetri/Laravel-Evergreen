@@ -29,7 +29,7 @@
         <a href="{{route('orders.index')}}">
             <div class="px-4 py-8 rounded-lg bg-pink-600 text-white flex justify-between">
                 <p class="font-bold text-lg">Total Orders</p>
-                <p class="font-bold text-5xl">{{ count($users) }}</p>
+                <p class="font-bold text-5xl">{{ count($totalorders) }}</p>
             </div>
         </a>
     </div>

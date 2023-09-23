@@ -22,16 +22,16 @@ class FrontendController extends Controller
 
 
         // Get all products from the database
-        $products = Product::all();
+        $topproducts = Product::all();
 
         // Perform Bubble Sort based on the 'totalsells' column
-        $n = count($products);
+        $n = count($topproducts);
         for ($i = 0; $i < $n - 1; $i++) {
             for ($j = 0; $j < $n - $i - 1; $j++) {
-                if ($products[$j]->totalsells < $products[$j + 1]->totalsells) {
+                if ($topproducts[$j]->totalsells < $topproducts[$j + 1]->totalsells) {
                     // Swap the products if they are in the wrong order
-                    $temp = $products[$j];
-                    $products[$j] = $products[$j + 1];
+                    $temp = $topproducts[$j];
+                    $products[$j] = $topproducts[$j + 1];
                     $products[$j + 1] = $temp;
                 }
             }
@@ -40,11 +40,26 @@ class FrontendController extends Controller
         // Paginate the sorted products and pass them to the view
         $perPage = 6;
         $currentPage = request()->input('page', 1);
-        $products = collect($products)->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $products = new \Illuminate\Pagination\LengthAwarePaginator($products, count($products), $perPage, $currentPage);
+        $topproducts = collect($topproducts)->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $topproducts = new \Illuminate\Pagination\LengthAwarePaginator($topproducts, count($topproducts), $perPage, $currentPage);
 
 
-        return view('user.index', compact('products'));
+        // Get the top four categories ordered by 'totalsells' in ascending order
+        $topFourCategories = Category::orderBy('totalsells', 'desc')->take(6)->get();
+
+        // Create an array to store the top three products for each category
+        $topThreeProductsByCategory = [];
+
+        foreach ($topFourCategories as $category) {
+            $topThreeProducts = Product::where('category_id', $category->id)
+                ->orderBy('totalsells', 'desc')
+                ->take(3)
+                ->get();
+
+            $topThreeProductsByCategory[$category->name] = $topThreeProducts;
+        }
+
+        return view('user.index', compact('topproducts', 'topFourCategories', 'topThreeProductsByCategory'));
     }
 
 
@@ -191,5 +206,26 @@ class FrontendController extends Controller
         }
 
         return back();
+    }
+
+
+    public function aboutuspage()
+    {
+        return view('user.aboutus');
+    }
+
+    public function teampage()
+    {
+        return view('user.team');
+    }
+
+    public function pricingpage()
+    {
+        return view('user.pricing');
+    }
+
+    public function contactuspage()
+    {
+        return view('user.contactus');
     }
 }

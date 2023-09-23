@@ -25,7 +25,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Role;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +39,13 @@ use App\Models\Role;
 */
 
 Route::get('/', function () {
-    $products = Product::latest()->paginate(8);
-    return view('home', compact('products'));
+    $topproducts = Product::orderBy('totalsells', 'desc')->paginate(6);
+
+    if (auth()->check()) {
+        return redirect('/user');
+    }
+
+    return view('home', compact('topproducts'));
 });
 
 Route::post('/', [ContactController::class, 'send'])->name('send.email');
@@ -94,12 +99,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/orders/', [OrderController::class, 'index'])->name('user.orders.index');
     Route::post('/user/orders/store', [OrderController::class, 'store'])->name('user.orders.store');
     Route::post('/user/orders/destroy', [OrderController::class, 'ordersdestroy'])->name('user.orders.destroy');
-
-    // 
     Route::get('/user/orders/orderhistory', [OrderController::class, 'orderhistory'])->name('user.orders.orderhistory');
-
-    //Feedback
-    Route::post('/user/feedbacks/store', [FeedbackController::class, 'store'])->name('user.feedbacks.store');
 
     // Cart
     Route::get('/user/orders/cart', [CartController::class, 'index'])->name('user.orders.cart');
@@ -107,14 +107,38 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user/orders/cart/{id}/updatestock', [CartController::class, 'updateStock'])->name('user.orders.cart.updatestock');
     Route::post('/user/orders/cart/destroy', [CartController::class, 'destroy'])->name('user.orders.cart.destroy');
 
+    //Feedback
+    Route::post('/user/feedbacks/store', [FeedbackController::class, 'store'])->name('user.feedbacks.store');
+
     //User Profile
     Route::get('/user/profile/', [UserProfileContoller::class, 'index'])->name('user.profile.index');
+    Route::post('/user/profile/changeprofileimage', [UserProfileContoller::class, 'changeprofileimage'])->name('user.profile.changeprofileimage');
+    Route::post('/user/profile/changeprofileinformation', [UserProfileContoller::class, 'changeprofileinfo'])->name('user.profile.changeprofileinfo');
+    Route::post('/user/profile/changebusinessinformation', [UserProfileContoller::class, 'changebusinessinfo'])->name('user.profile.changebusinessinfo');
+    Route::post('/user/profile/changeprofilepassword', [UserProfileContoller::class, 'changeprofilepassword'])->name('user.profile.changeprofilepassword');
+    Route::post('/user/profile/destroy', [UserProfileContoller::class, 'destroy'])->name('user.profile.destroy');
+
+
 
     // User Notification
     Route::get('/user/notifications', [FrontendController::class, 'notificationspage'])->name('user.notifications');
     Route::get('/user/notifications/{id}/redirect', [FrontendController::class, 'notificationredireact'])->name('user.notification.redireact');
     Route::get('/user/notifications/markasread', [FrontendController::class, 'markallasread'])->name('user.notifications.markallasread');
     Route::get('/user/notifications/markasunread', [FrontendController::class, 'markallasunread'])->name('user.notifications.markallasunread');
+
+
+
+    //about Us Page
+    Route::get('/user/aboutus', [FrontendController::class, 'aboutuspage'])->name('user.aboutus');
+
+    //Pricing Page
+    Route::get('/user/pricing', [FrontendController::class, 'pricingpage'])->name('user.pricing');
+
+    //Team Page
+    Route::get('/user/team', [FrontendController::class, 'teampage'])->name('user.team');
+
+    //Contact Us Page
+    Route::get('/user/contactus', [FrontendController::class, 'contactuspage'])->name('user.contactus');
 });
 
 // Role and Permission
@@ -137,7 +161,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 // Profile
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -150,7 +174,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:admin')->group(function () {
 
     // All Users
     Route::get('/allusers', [AllUserController::class, 'index'])->name('allusers.index');
