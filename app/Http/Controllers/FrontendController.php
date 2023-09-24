@@ -24,15 +24,15 @@ class FrontendController extends Controller
         // Get all products from the database
         $topproducts = Product::all();
 
-        // Perform Bubble Sort based on the 'totalsells' column
+        // Perform Bubble Sort based on the 'totalsells' column in descending order
         $n = count($topproducts);
         for ($i = 0; $i < $n - 1; $i++) {
             for ($j = 0; $j < $n - $i - 1; $j++) {
                 if ($topproducts[$j]->totalsells < $topproducts[$j + 1]->totalsells) {
                     // Swap the products if they are in the wrong order
                     $temp = $topproducts[$j];
-                    $products[$j] = $topproducts[$j + 1];
-                    $products[$j + 1] = $temp;
+                    $topproducts[$j] = $topproducts[$j + 1];
+                    $topproducts[$j + 1] = $temp;
                 }
             }
         }
@@ -86,7 +86,7 @@ class FrontendController extends Controller
         $data = $request->validate([
             'phone' => 'required',
             'address' => 'required',
-            'panimage' => 'required',
+            'panimage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pannumber' => 'required',
         ]);
 
@@ -172,7 +172,7 @@ class FrontendController extends Controller
         if ($notification->title == 'SellRequestDeclined' || $notification->title == 'SellRequestAccepted') {
             return redirect(route('user.sell.index'));
         } elseif ($notification->title == 'NewUser') {
-            return redirect(route('alluser.index'));
+            return redirect(route('allusers.index'));
         } elseif ($notification->title == 'NewOrder') {
             return redirect(route('user.sell.orders'));
         } elseif ($notification->title == 'SellRequest') {

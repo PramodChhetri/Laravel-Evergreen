@@ -31,7 +31,7 @@ class SellController extends Controller
         $data = $request->validate([
             'phone' => 'required',
             'address' => 'required',
-            'panimage' => 'required',
+            'panimage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pannumber' => 'required',
         ]);
 
@@ -70,7 +70,7 @@ class SellController extends Controller
         // Custom for notification in admin dashboard
         event(new SellRequest($notification));
 
-        return redirect(route('user.sell.index'))->with('success', 'User Updated Successfully');
+        return redirect('/user/sell/')->with('success', 'User Updated Successfully');
     }
 
     public function manageproducts()
@@ -95,7 +95,7 @@ class SellController extends Controller
             'description' => 'required',
             'condition' => 'required',
             'brand' => 'required',
-            'photopath' => 'required'
+            'photopath' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('photopath')) {
@@ -129,7 +129,7 @@ class SellController extends Controller
             'description' => 'required',
             'condition' => 'required',
             'brand' => 'required',
-            'photopath' => 'nullable'
+            'photopath' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('photopath')) {
@@ -301,8 +301,10 @@ class SellController extends Controller
     {
         $order = Order::find($id);
         $product = Product::find($order->product_id);
+        $category = Category::find($product->category_id);
         $quantity = $order->quantity;
         $productsales = $product->totalsells;
+        $categorysales = $category->totalsells;
 
         $order->update([
             'status' => 'Completed'
@@ -310,6 +312,9 @@ class SellController extends Controller
 
         $product->update([
             'totalsells' => $productsales + $quantity
+        ]);
+        $category->update([
+            'totalsells' => $categorysales + $quantity
         ]);
 
         return redirect(route('user.sell.ordersapproved'))->with('success', 'Order Complete Successfully!');
@@ -319,8 +324,10 @@ class SellController extends Controller
     {
         $order = Order::find($id);
         $product = Product::find($order->product_id);
+        $category = Category::find($product->category_id);
         $quantity = $order->quantity;
         $productsales = $product->totalsells;
+        $categorysales = $category->totalsells;
 
         $order->update([
             'status' => 'Returned'
@@ -329,6 +336,11 @@ class SellController extends Controller
         if ($productsales >= $quantity) {
             $product->update([
                 'totalsells' => $productsales - $quantity
+            ]);
+        }
+        if ($categorysales >= $quantity) {
+            $category->update([
+                'totalsells' => $categorysales - $quantity
             ]);
         }
 

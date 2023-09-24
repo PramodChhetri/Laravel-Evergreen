@@ -33,7 +33,7 @@ class ProductController extends Controller
             'description' => 'required',
             'condition' => 'required',
             'brand' => 'required',
-            'photopath' => 'required'
+            'photopath' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('photopath')) {
@@ -67,7 +67,7 @@ class ProductController extends Controller
             'description' => 'required',
             'condition' => 'required',
             'brand' => 'required',
-            'photopath' => 'nullable'
+            'photopath' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($request->hasFile('photopath')) {

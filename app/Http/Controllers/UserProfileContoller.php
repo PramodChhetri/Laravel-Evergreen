@@ -19,7 +19,7 @@ class UserProfileContoller extends Controller
     {
         $user = User::find(Auth::user()->id);
         $data = $request->validate([
-            'image' => 'nullable',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -78,7 +78,7 @@ class UserProfileContoller extends Controller
         $data = $request->validate([
             'phone' => 'required',
             'address' => 'required',
-            'panimage' => 'nullable',
+            'panimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pannumber' => 'required',
         ]);
 
